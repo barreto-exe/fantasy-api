@@ -15,8 +15,6 @@ namespace FantasyApi.Functions
         public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function)
             where TInput : BaseRequest, new()
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-
             //Validating jwt
             //var jwt = new JWTValidator(req);
             //if (!jwt.IsValid)

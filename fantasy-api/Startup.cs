@@ -14,6 +14,8 @@ namespace FantasyApi
         {
             string connectionString = Environment.GetEnvironmentVariable("SqlConnectionString");
             builder.Services.Add(new ServiceDescriptor(typeof(IBaseDatabaseService), new CentralDatabaseService(connectionString)));
+
+            builder.Services.AddTransient<IAuthService, AuthService>();
         }
     }
 }
