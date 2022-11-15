@@ -1,9 +1,13 @@
 ﻿using FantasyApi.Data;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Utils
@@ -57,6 +61,20 @@ namespace FantasyApi.Utils
         public static bool IsValid(this BaseRequest model, out List<ValidationResult> validationResults)
         {
             return Validator.TryValidateObject(model, new ValidationContext(model), validationResults = new(), true);
+        }
+
+        public static string GetDescription(this Enum e)
+        {
+            var attribute =
+                e.GetType()
+                    .GetTypeInfo()
+                    .GetMember(e.ToString())
+                    .FirstOrDefault(member => member.MemberType == MemberTypes.Field)
+                    .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                    .SingleOrDefault()
+                    as DescriptionAttribute;
+
+            return attribute?.Description ?? e.ToString();
         }
     }
 }

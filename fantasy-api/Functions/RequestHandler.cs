@@ -1,5 +1,7 @@
 ﻿using FantasyApi.Data;
 using FantasyApi.Utils;
+using FantasyApi.Utils.JWT;
+using FantasyApi.Utils.JWT.Enum;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,15 +14,15 @@ namespace FantasyApi.Functions
 {
     public static class RequestHandler
     {
-        public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function)
+        public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function, RoleEnum role = RoleEnum.Any)
             where TInput : BaseRequest, new()
         {
             //Validating jwt
-            //var jwt = new JWTValidator(req);
-            //if (!jwt.IsValid)
-            //{
-            //    return new BadRequestObjectResult("Jwt is not valid.");
-            //}
+            var jwt = new JWTValidator(req, role);
+            if (!jwt.IsValid)
+            {
+                return new UnauthorizedObjectResult("Jwt is not valid.");
+            }
 
             TInput input;
             try

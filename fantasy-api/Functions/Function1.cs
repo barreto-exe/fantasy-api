@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using FantasyApi.Interfaces;
 using System.Data;
+using FantasyApi.Data;
+using FantasyApi.Utils.JWT;
+using FantasyApi.Utils.JWT.Enum;
 
 namespace FantasyApi.Functions
 {
@@ -22,25 +25,15 @@ namespace FantasyApi.Functions
 
         [FunctionName("Function1")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            string query = "select * from entidades";
-            var cmd = _baseDatabaseService.GetCommand(query, type: CommandType.Text);
-            var data = await _baseDatabaseService.ExecuteStoredProcedureDataSetAsync(cmd);
-
-            object result;
-
-            if (data.Tables.Count > 0 && data.Tables[0].Rows.Count > 0)
+            async Task<IActionResult> Action(BaseRequest input)
             {
-                result = data.Tables[0];
-            }
-            else
-            {
-                return null;
+                return new OkObjectResult("cool");
             }
 
-            return new OkObjectResult(result);
+            return await RequestHandler.Handle<BaseRequest>(req, log, Action, RoleEnum.Admin);
         }
     }
 }

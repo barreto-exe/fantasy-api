@@ -1,4 +1,5 @@
-﻿using JWT.Algorithms;
+﻿using FantasyApi.Utils.JWT.Enum;
+using JWT.Algorithms;
 using JWT.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
@@ -7,31 +8,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace FantasyApi.Utils
+namespace FantasyApi.Utils.JWT
 {
     public class JWTValidator
     {
-        public bool IsValid { get; }
         public IDictionary<string, object> Claims { get; set; }
+        public bool IsValid { get; set; } = false;
 
-        public JWTValidator(HttpRequest request)
+        public JWTValidator(HttpRequest request, RoleEnum role)
         {
             // Check if we have a header.
             if (!request.Headers.ContainsKey("Authorization"))
             {
-                IsValid = false;
                 return;
             }
-
-            string authorizationHeader = request.Headers["Authorization"];
 
             // Check if the value is empty.
+            string authorizationHeader = request.Headers["Authorization"];
             if (string.IsNullOrEmpty(authorizationHeader))
             {
-                IsValid = false;
                 return;
             }
 
+            //Check signature
             try
             {
                 if (authorizationHeader.StartsWith("Bearer"))
@@ -39,52 +38,29 @@ namespace FantasyApi.Utils
                     authorizationHeader = authorizationHeader.Substring(7);
                 }
 
-                //Read JWT Public key data
-                string modulus = Environment.GetEnvironmentVariable("JWTK_RSA_MODULUS");
-                string exponent = Environment.GetEnvironmentVariable("JWTK_RSA_EXPONENT");
-
-                RSACryptoServiceProvider publicKey = new RSACryptoServiceProvider();
-                publicKey.ImportParameters(
-                  new RSAParameters()
-                  {
-                      Modulus = FromBase64Url(modulus),
-                      Exponent = FromBase64Url(exponent)
-                  });
-
+                string jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
                 Claims =
                     new JwtBuilder()
-                    .WithAlgorithm(new RS256Algorithm(publicKey))
+                    .WithAlgorithm(new HMACSHA256Algorithm())
+                    .WithSecret(jwtSecret)
                     .MustVerifySignature()
                     .Decode<IDictionary<string, object>>(authorizationHeader);
             }
-            catch (Exception exception)
+            catch
             {
-                IsValid = false;
                 return;
             }
 
-            //if (!_claims.ContainsKey("emails"))
-            //{
-            //    IsValid = false;
-            //    return;
-            //}
+            //Check role
+            string userRole = GetValueOrDefault("role").ToString();
+            string actionRole = role.GetDescription();
+            if (userRole != actionRole)
+            {
+                return;
+            }
 
-            //if (!_claims.ContainsKey("extension_Username"))
-            //{
-            //    IsValid = false;
-            //    return;
-            //}
-
+            //Everything OK
             IsValid = true;
-        }
-
-        private byte[] FromBase64Url(string base64Url)
-        {
-            string padded = base64Url.Length % 4 == 0
-                ? base64Url : base64Url + "====".Substring(base64Url.Length % 4);
-            string base64 = padded.Replace("_", "/")
-                                  .Replace("-", "+");
-            return Convert.FromBase64String(base64);
         }
 
         public object GetValueOrDefault(string key)

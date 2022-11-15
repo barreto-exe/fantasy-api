@@ -23,15 +23,16 @@ namespace FantasyApi.Functions.Auth
 
         [FunctionName("Login")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "login")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "login")] HttpRequest req,
             ILogger log)
         {
-            return await RequestHandler.Handle<LoginInput>(req, log, async (input) =>
+            async Task<IActionResult> Action(LoginInput input)
             {
                 var data = await _authService.Login(input);
-
                 return new OkObjectResult(data);
-            });
+            }
+
+            return await RequestHandler.Handle<LoginInput>(req, log, Action);
         }
     }
 }
