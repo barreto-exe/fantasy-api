@@ -29,6 +29,15 @@ namespace FantasyApi.Functions.Auth
             async Task<IActionResult> Action(LoginInput input)
             {
                 var data = await _authService.Login(input);
+
+                if(data == null)
+                {
+                    return new BadRequestObjectResult(new
+                    {
+                        code = "NO_EMAIL_OR_PASSWORD_MATCH",
+                    });
+                }
+
                 return new OkObjectResult(data);
             }
 
