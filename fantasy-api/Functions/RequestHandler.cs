@@ -14,7 +14,7 @@ namespace FantasyApi.Functions
 {
     public static class RequestHandler
     {
-        public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function, RoleEnum role = RoleEnum.Any)
+        public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function, RoleEnum role)
             where TInput : BaseRequest, new()
         {
             //Validating jwt

@@ -1,12 +1,11 @@
 ﻿using MySqlConnector;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Interfaces
 {
-    public interface IBaseDatabaseService
+    public interface IDatabaseService
     {
         DataTable ExecuteStoredProcedure(MySqlCommand cmd);
         Task<DataTable> ExecuteStoredProcedureAsync(MySqlCommand cmd);

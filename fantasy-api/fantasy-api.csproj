@@ -21,6 +21,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Filters\" />
+    <Folder Include="Data\Auth\Exceptions\" />
+    <Folder Include="Data\Auth\Filters\" />
+    <Folder Include="Data\Users\Filters\" />
   </ItemGroup>
 </Project>

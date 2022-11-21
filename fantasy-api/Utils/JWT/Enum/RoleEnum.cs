@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace FantasyApi.Utils.JWT.Enum
 {
     public enum RoleEnum
     {
         Any,
-        [Description("Administrador")]
+        [Description("Admin")]
         Admin,
-        [Description("Usuario")]
+        [Description("User")]
         User,
-        [Description("Anunciante")]
+        [Description("Announcer")]
         Advertiser,
     }
 }

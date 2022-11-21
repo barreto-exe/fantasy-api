@@ -1,15 +1,12 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using FantasyApi.Data.Auth.Inputs;
+using FantasyApi.Interfaces;
+using FantasyApi.Utils.JWT.Enum;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using FantasyApi.Data;
-using FantasyApi.Interfaces;
-using FantasyApi.Data.Inputs;
+using System.Threading.Tasks;
 
 namespace FantasyApi.Functions.Auth
 {
@@ -30,18 +27,15 @@ namespace FantasyApi.Functions.Auth
             {
                 var data = await _authService.Login(input);
 
-                if(data == null)
+                if (data == null)
                 {
-                    return new BadRequestObjectResult(new
-                    {
-                        code = "NO_EMAIL_OR_PASSWORD_MATCH",
-                    });
+                    return new BadRequestObjectResult(IAuthService.ErrorCodeBuilder("NO_PASSWORD_MATCH"));
                 }
 
                 return new OkObjectResult(data);
             }
 
-            return await RequestHandler.Handle<LoginInput>(req, log, Action);
+            return await RequestHandler.Handle<LoginInput>(req, log, Action, RoleEnum.Any);
         }
     }
 }

@@ -2,16 +2,15 @@
 using MySqlConnector;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Services
 {
-    public class CentralDatabaseService : IBaseDatabaseService
+    public class DatabaseService : IDatabaseService
     {
         public string Connectionstring { get; set; }
 
-        public CentralDatabaseService(string _connectionstring)
+        public DatabaseService(string _connectionstring)
         {
             Connectionstring = _connectionstring;
         }

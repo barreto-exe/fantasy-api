@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace FantasyApi.Utils.JWT
 {
@@ -17,13 +16,20 @@ namespace FantasyApi.Utils.JWT
 
         public JWTValidator(HttpRequest request, RoleEnum role)
         {
-            // Check if we have a header.
+            //If auth's for any, then there's nothing to check
+            if(role == RoleEnum.Any)
+            {
+                IsValid = true;
+                return;
+            }
+
+            // Check if we have a header
             if (!request.Headers.ContainsKey("Authorization"))
             {
                 return;
             }
 
-            // Check if the value is empty.
+            // Check if the value is empty
             string authorizationHeader = request.Headers["Authorization"];
             if (string.IsNullOrEmpty(authorizationHeader))
             {
