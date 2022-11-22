@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FantasyApi.Data.Base.Requests;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace FantasyApi.Data.Users.Inputs

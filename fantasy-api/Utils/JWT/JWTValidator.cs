@@ -17,7 +17,7 @@ namespace FantasyApi.Utils.JWT
         public JWTValidator(HttpRequest request, RoleEnum role)
         {
             //If auth's for any, then there's nothing to check
-            if(role == RoleEnum.Any)
+            if (role == RoleEnum.Any)
             {
                 IsValid = true;
                 return;

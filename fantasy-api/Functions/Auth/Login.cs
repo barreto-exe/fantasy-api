@@ -1,5 +1,6 @@
 using FantasyApi.Data.Auth.Inputs;
 using FantasyApi.Interfaces;
+using FantasyApi.Utils;
 using FantasyApi.Utils.JWT.Enum;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace FantasyApi.Functions.Auth
 
                 if (data == null)
                 {
-                    return new BadRequestObjectResult(IAuthService.ErrorCodeBuilder("NO_PASSWORD_MATCH"));
+                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("NO_PASSWORD_MATCH"));
                 }
 
                 return new OkObjectResult(data);

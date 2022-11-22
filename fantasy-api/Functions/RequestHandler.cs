@@ -1,4 +1,4 @@
-﻿using FantasyApi.Data;
+﻿using FantasyApi.Data.Base.Requests;
 using FantasyApi.Utils;
 using FantasyApi.Utils.JWT;
 using FantasyApi.Utils.JWT.Enum;
@@ -33,8 +33,12 @@ namespace FantasyApi.Functions
                 //    input = new();
                 //}
                 //else 
-                
-                if (req.Method.Equals("get", StringComparison.InvariantCultureIgnoreCase))
+
+                if (req.Method.Equals("delete", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    input = new();
+                }
+                else if (req.Method.Equals("get", StringComparison.InvariantCultureIgnoreCase))
                 {
                     input = req.Query.ToObject<TInput>();
                 }

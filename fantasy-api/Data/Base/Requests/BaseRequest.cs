@@ -1,4 +1,4 @@
-﻿namespace FantasyApi.Data
+﻿namespace FantasyApi.Data.Base.Requests
 {
     public class BaseRequest
     {

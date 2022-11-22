@@ -1,4 +1,4 @@
-﻿using FantasyApi.Data;
+﻿using FantasyApi.Data.Base.Requests;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System;

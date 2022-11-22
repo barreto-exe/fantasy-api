@@ -4,7 +4,6 @@ using FantasyApi.Data.Users.Exceptions;
 using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.WindowsAzure.Storage.Blob.Protocol;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -38,7 +37,7 @@ namespace FantasyApi.Services
                     Password = input.Password,
                 });
             }
-            catch(UserExistsException ex)
+            catch (UserExistsException ex)
             {
                 throw ex;
             }

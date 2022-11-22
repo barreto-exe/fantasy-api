@@ -1,5 +1,6 @@
-﻿using FantasyApi.Data;
-using FantasyApi.Data.Auth.Inputs;
+﻿using FantasyApi.Data.Auth.Inputs;
+using FantasyApi.Data.Base.Dtos;
+using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Users.Dtos;
 using FantasyApi.Data.Users.Inputs;
 using System.Collections.Generic;
@@ -11,11 +12,16 @@ namespace FantasyApi.Interfaces
     {
         Task<UserDto> GetUserByMailAndPassAsync(LoginInput input);
 
+        Task<UserDto> GetUserById(int id);
+
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
 
         Task<PaginatedListDto<UserDto>> GetAllUsersPaginatedAsync(BaseRequest filter);
 
         /// <exception cref="UserExistsException"></exception>
-        Task AddUserAsync(UserAddInput input);
+        Task<UserDto> AddUserAsync(UserAddInput input);
+
+        /// <exception cref="UserDoesntExistException"></exception>
+        Task DeleteUserAsync(int id);
     }
 }

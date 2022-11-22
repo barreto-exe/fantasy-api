@@ -1,5 +1,5 @@
-using FantasyApi.Data.Auth.Inputs;
 using FantasyApi.Data.Users.Exceptions;
+using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
 using FantasyApi.Utils.JWT.Enum;
@@ -10,27 +10,27 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace FantasyApi.Functions.Auth
+namespace FantasyApi.Functions.Users
 {
-    public class Register
+    public class PostUsers
     {
-        public IAuthService _authService;
-        public Register(IAuthService authService)
+        private readonly IUserService _userService;
+        public PostUsers(IUserService userService)
         {
-            _authService = authService;
+            _userService = userService;
         }
 
-        [FunctionName("Register")]
+        [FunctionName("PostUsers")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "register")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "users")] HttpRequest req,
             ILogger log)
         {
-            async Task<IActionResult> Action(RegisterInput input)
+            async Task<IActionResult> Action(UserAddInput input)
             {
                 try
                 {
-                    var result = await _authService.Register(input);
-                    return new OkObjectResult(result);
+                    var result = await _userService.AddUserAsync(input);
+                    return new OkObjectResult(ResponsesBuilder.CreationResponse("USER_CREATED", result));
                 }
                 catch (UserExistsException)
                 {
@@ -38,7 +38,7 @@ namespace FantasyApi.Functions.Auth
                 }
             }
 
-            return await RequestHandler.Handle<RegisterInput>(req, log, Action, RoleEnum.Any);
+            return await RequestHandler.Handle<UserAddInput>(req, log, Action, RoleEnum.Admin);
         }
     }
 }
