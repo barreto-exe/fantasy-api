@@ -28,11 +28,13 @@ namespace FantasyApi.Functions
             try
             {
                 // A base request has no aditional parameters 
-                if (typeof(TInput) == typeof(BaseRequest) || req.Method.Equals("delete", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    input = new();
-                }
-                else if (req.Method.Equals("get", StringComparison.InvariantCultureIgnoreCase))
+                //if (typeof(TInput) == typeof(BaseRequest) || req.Method.Equals("delete", StringComparison.InvariantCultureIgnoreCase))
+                //{
+                //    input = new();
+                //}
+                //else 
+                
+                if (req.Method.Equals("get", StringComparison.InvariantCultureIgnoreCase))
                 {
                     input = req.Query.ToObject<TInput>();
                 }

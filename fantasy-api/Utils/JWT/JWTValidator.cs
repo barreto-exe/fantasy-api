@@ -58,8 +58,8 @@ namespace FantasyApi.Utils.JWT
             }
 
             //Check role
-            string userRole = GetValueOrDefault("role").ToString();
-            string actionRole = role.GetDescription();
+            string userRole = GetValueOrDefault("role").ToString().ToLower();
+            string actionRole = role.GetDescription().ToLower();
             if (userRole != actionRole)
             {
                 return;

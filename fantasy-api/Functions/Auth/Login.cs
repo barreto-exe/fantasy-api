@@ -12,7 +12,7 @@ namespace FantasyApi.Functions.Auth
 {
     public class Login
     {
-        public IAuthService _authService;
+        public readonly IAuthService _authService;
         public Login(IAuthService authService)
         {
             _authService = authService;
