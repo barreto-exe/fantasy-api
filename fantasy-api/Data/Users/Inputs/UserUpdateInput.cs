@@ -4,17 +4,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FantasyApi.Data.Users.Inputs
 {
-    public class UserAddInput : BaseRequest
+    public class UserUpdateInput : BaseRequest
     {
-        public int? Id { get; set; }
         [Required]
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Required]
         public string Role { get; set; }
         public DateTime? BirthDate { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
         public string Password { get; set; }
     }
 }

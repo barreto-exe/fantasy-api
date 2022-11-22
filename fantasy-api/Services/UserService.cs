@@ -149,6 +149,35 @@ namespace FantasyApi.Services
         }
 
         /// <exception cref="UserDoesntExistException"></exception>
+        public async Task<UserDto> UpdateUserAsync(UserUpdateInput input)
+        {
+            var user = await GetUserById(input.Id);
+            if (user == null)
+            {
+                throw new UserDoesntExistException();
+            }
+
+            List<MySqlParameter> parameters = new()
+            {
+                new MySqlParameter("user_id", input.Id),
+                new MySqlParameter("user_name", input.Name ?? user.Name),
+                new MySqlParameter("user_role", input.Role ?? user.Role),
+                new MySqlParameter("user_birth_date", input.BirthDate ?? user.BirthDate),
+                new MySqlParameter("user_email", input.Email ?? user.Email),
+                new MySqlParameter("user_pass", input.Password ?? user.PasswordMd5),
+            };
+
+            var cmd = _baseDatabaseService.GetCommand("UpdateUser", parameters);
+            await _baseDatabaseService.ExecuteStoredProcedureAsync(cmd);
+
+            return await GetUserByMailAndPassAsync(new LoginInput()
+            {
+                Email = input.Email ?? user.Email,
+                Password = input.Password ?? user.PasswordMd5,
+            });
+        }
+
+        /// <exception cref="UserDoesntExistException"></exception>
         public async Task DeleteUserAsync(int id)
         {
             var user = await GetUserById(id);
@@ -165,6 +194,5 @@ namespace FantasyApi.Services
             var cmd = _baseDatabaseService.GetCommand("DeleteUser", parameters);
             await _baseDatabaseService.ExecuteStoredProcedureAsync(cmd);
         }
-
     }
 }

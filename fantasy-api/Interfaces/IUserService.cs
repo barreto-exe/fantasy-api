@@ -22,6 +22,9 @@ namespace FantasyApi.Interfaces
         Task<UserDto> AddUserAsync(UserAddInput input);
 
         /// <exception cref="UserDoesntExistException"></exception>
+        Task<UserDto> UpdateUserAsync(UserUpdateInput input);
+
+        /// <exception cref="UserDoesntExistException"></exception>
         Task DeleteUserAsync(int id);
     }
 }
