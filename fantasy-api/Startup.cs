@@ -17,6 +17,7 @@ namespace FantasyApi
 
             builder.Services.AddTransient<IAuthService, AuthService>();
             builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IEventService, EventService>();
         }
     }
 }
