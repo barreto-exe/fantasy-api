@@ -1,14 +1,10 @@
 ﻿using Core.Utils.Mapping;
 using FantasyApi.Data.Base.Dtos;
 using FantasyApi.Data.Base.Requests;
-using FantasyApi.Data.Events.Dtos;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
 using MySqlConnector;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Services

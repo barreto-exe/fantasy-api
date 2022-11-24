@@ -2,12 +2,10 @@
 using FantasyApi.Data.Auth.Inputs;
 using FantasyApi.Data.Base.Dtos;
 using FantasyApi.Data.Base.Requests;
-using FantasyApi.Data.Events.Dtos;
 using FantasyApi.Data.Users.Dtos;
 using FantasyApi.Data.Users.Exceptions;
 using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
-using FantasyApi.Utils;
 using MySqlConnector;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,11 +91,8 @@ namespace FantasyApi.Services
         public async Task<UserDto> AddUserAsync(UserAddInput input)
         {
             //Validate if email has already been used
-            var users = await GetUsersAsync();
-            bool userExists = (from u in users
-                               where u.Email == input.Email
-                               select u).ToList().Count > 0;
-            if (userExists)
+            var userWithEmail = (await GetUsersAsync())?.FirstOrDefault(x => x.Email == input.Email);
+            if (userWithEmail != null)
             {
                 throw new UserExistsException();
             }

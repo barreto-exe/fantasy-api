@@ -8,13 +8,14 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Functions
 {
     public static class RequestHandler
     {
-        public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function, RoleEnum role)
+        public static async Task<IActionResult> Handle<TInput>(HttpRequest req, ILogger log, Func<TInput, Task<IActionResult>> function, RoleEnum role, BodyTypeEnum bodyType = BodyTypeEnum.Json)
             where TInput : BaseRequest, new()
         {
             //Validating jwt
@@ -24,7 +25,7 @@ namespace FantasyApi.Functions
                 return new UnauthorizedObjectResult("Jwt is not valid.");
             }
 
-            TInput input;
+            TInput input = null;
             try
             {
                 // A base request has no aditional parameters 
@@ -44,11 +45,36 @@ namespace FantasyApi.Functions
                 }
                 else
                 {
-                    input = await req.Body.ToObjectAsync<TInput>();
-                    if (input == null) throw new Exception("Request body is empty");
-                }
+                    switch (bodyType)
+                    {
+                        case BodyTypeEnum.Json:
+                            {
+                                input = await req.Body.ToObjectAsync<TInput>();
+                                if (input == null) throw new Exception("Request body is empty");
+                                break;
+                            }
+                        case BodyTypeEnum.Formdata:
+                            {
+                                input = req.Form.ToObject<TInput>();
 
-                //input.Username = jwt.GetUsername();
+                                foreach (var file in req.Form.Files)
+                                {
+                                    var settings = BindingFlags.Instance |
+                                        BindingFlags.Public |
+                                        BindingFlags.SetProperty |
+                                        BindingFlags.IgnoreCase;
+
+                                    var prop = input.GetType().GetProperty(file.Name, settings);
+                                    if (prop != null && prop.CanWrite)
+                                    {
+                                        prop.SetValue(input, file);
+                                    }
+                                }
+
+                                break;
+                            }
+                    }
+                }
 
                 if (!input.IsValid(out List<ValidationResult> validationResults))
                 {

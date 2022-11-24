@@ -1,4 +1,5 @@
 ﻿using FantasyApi.Data.Base.Requests;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System;
@@ -55,6 +56,20 @@ namespace FantasyApi.Utils
 
             var someObject = JsonConvert.DeserializeObject<T>(json, JsonSerializerSettings);
 
+            return someObject;
+        }
+        public static T ToObject<T>(this IFormCollection source)
+            where T : class, new()
+        {
+            var dict = new Dictionary<string, string>();
+
+            foreach (var key in source.Keys)
+            {
+                dict.Add(key, source[key]);
+            }
+
+            var json = JsonConvert.SerializeObject(dict, JsonSerializerSettings);
+            var someObject = JsonConvert.DeserializeObject<T>(json, JsonSerializerSettings);
             return someObject;
         }
 

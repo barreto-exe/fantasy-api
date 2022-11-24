@@ -1,19 +1,14 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using FantasyApi.Data.Events.Exceptions;
+using FantasyApi.Data.Events.Inputs;
+using FantasyApi.Interfaces;
+using FantasyApi.Utils;
+using FantasyApi.Utils.JWT.Enum;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using FantasyApi.Interfaces;
-using FantasyApi.Data.Base.Requests;
-using FantasyApi.Utils.JWT.Enum;
-using FantasyApi.Data.Events.Inputs;
-using FantasyApi.Services;
-using FantasyApi.Utils;
-using FantasyApi.Data.Events.Exceptions;
+using System.Threading.Tasks;
 
 namespace FantasyApi.Functions.Events
 {
@@ -43,7 +38,7 @@ namespace FantasyApi.Functions.Events
                 }
             }
 
-            return await RequestHandler.Handle<EventAddInput>(req, log, Action, RoleEnum.Admin);
+            return await RequestHandler.Handle<EventAddInput>(req, log, Action, RoleEnum.Admin, BodyTypeEnum.Formdata);
         }
     }
 }

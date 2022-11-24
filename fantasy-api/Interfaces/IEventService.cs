@@ -2,11 +2,7 @@
 using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Events.Dtos;
 using FantasyApi.Data.Events.Inputs;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Interfaces
