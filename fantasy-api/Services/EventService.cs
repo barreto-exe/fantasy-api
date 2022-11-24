@@ -2,7 +2,10 @@
 using FantasyApi.Data.Base.Dtos;
 using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Events.Dtos;
+using FantasyApi.Data.Events.Exceptions;
+using FantasyApi.Data.Events.Inputs;
 using FantasyApi.Data.Users.Dtos;
+using FantasyApi.Data.Users.Exceptions;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
 using Microsoft.Azure.ServiceBus;
@@ -19,7 +22,7 @@ namespace FantasyApi.Services
     {
         public EventService(IDatabaseService databaseService) : base(databaseService) { }
 
-        public async Task<IEnumerable<EventDto>> GetEvents()
+        public async Task<IEnumerable<EventDto>> GetEventsAsync()
         {
             var cmd = _databaseService.GetCommand("GetEvents");
             var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
@@ -36,9 +39,25 @@ namespace FantasyApi.Services
             }
         }
 
-        public async Task<PaginatedListDto<EventDto>> GetEventsPaginated(BaseRequest filter)
+        public async Task<PaginatedListDto<EventDto>> GetEventsPaginatedAsync(BaseRequest filter)
         {
             return await GetItemsPaginated<EventDto>(filter, "GetEventsPaginated");
+        }
+
+        /// <exception cref="EventExistsException"></exception>
+        public async Task<EventDto> AddEventAsync(EventAddInput input)
+        {
+            //Validate if email has already been used
+            var events = await GetEventsAsync();
+            bool eventExists = (from u in events
+                                where u.Name == input.EventName
+                                select u).ToList().Count > 0;
+            if (eventExists)
+            {
+                throw new EventExistsException();
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

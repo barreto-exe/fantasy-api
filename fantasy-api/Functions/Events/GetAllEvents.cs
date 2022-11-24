@@ -29,7 +29,7 @@ namespace FantasyApi.Functions.Events
         {
             async Task<IActionResult> Action(BaseRequest filter)
             {
-                var data = await _eventService.GetEvents();
+                var data = await _eventService.GetEventsAsync();
                 return new OkObjectResult(data);
             }
 

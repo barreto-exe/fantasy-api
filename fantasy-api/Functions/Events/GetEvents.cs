@@ -28,7 +28,7 @@ namespace FantasyApi.Functions.Events
         {
             async Task<IActionResult> Action(BaseRequest filter)
             {
-                var data = await _eventService.GetEventsPaginated(filter);
+                var data = await _eventService.GetEventsPaginatedAsync(filter);
                 return new OkObjectResult(data);
             }
 

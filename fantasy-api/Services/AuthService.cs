@@ -24,7 +24,7 @@ namespace FantasyApi.Services
         }
 
         /// <exception cref="UserExistsException"></exception>
-        public async Task<LoginDto> Register(RegisterInput input)
+        public async Task<LoginDto> RegisterAsync(RegisterInput input)
         {
             try
             {
@@ -42,14 +42,14 @@ namespace FantasyApi.Services
                 throw ex;
             }
 
-            return await Login(new LoginInput
+            return await LoginAsync(new LoginInput
             {
                 Email = input.Email,
                 Password = input.Password,
             });
         }
 
-        public async Task<LoginDto> Login(LoginInput input)
+        public async Task<LoginDto> LoginAsync(LoginInput input)
         {
             var user = await _userService.GetUserByMailAndPassAsync(input);
             if (user == null)

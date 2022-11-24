@@ -7,8 +7,8 @@ namespace FantasyApi.Interfaces
     public interface IAuthService
     {
         /// <exception cref="UserExistsException"></exception>
-        Task<LoginDto> Register(RegisterInput input);
+        Task<LoginDto> RegisterAsync(RegisterInput input);
 
-        Task<LoginDto> Login(LoginInput input);
+        Task<LoginDto> LoginAsync(LoginInput input);
     }
 }

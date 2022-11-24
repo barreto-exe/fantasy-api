@@ -26,7 +26,7 @@ namespace FantasyApi.Functions.Auth
         {
             async Task<IActionResult> Action(LoginInput input)
             {
-                var data = await _authService.Login(input);
+                var data = await _authService.LoginAsync(input);
 
                 if (data == null)
                 {

@@ -19,7 +19,7 @@ namespace FantasyApi.Services
     {
         public UserService(IDatabaseService databaseService) : base(databaseService) { }
 
-        public async Task<UserDto> GetUserById(int id)
+        public async Task<UserDto> GetUserByIdAsync(int id)
         {
             List<MySqlParameter> parameters = new()
             {
@@ -42,7 +42,7 @@ namespace FantasyApi.Services
             }
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
         {
             var cmd = _databaseService.GetCommand("GetUsers");
             var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
@@ -60,7 +60,7 @@ namespace FantasyApi.Services
             }
         }
 
-        public async Task<PaginatedListDto<UserDto>> GetAllUsersPaginatedAsync(BaseRequest filter)
+        public async Task<PaginatedListDto<UserDto>> GetUsersPaginatedAsync(BaseRequest filter)
         {
             return await GetItemsPaginated<UserDto>(filter, "GetUsersPaginated");
         }
@@ -93,7 +93,7 @@ namespace FantasyApi.Services
         public async Task<UserDto> AddUserAsync(UserAddInput input)
         {
             //Validate if email has already been used
-            var users = await GetAllUsersAsync();
+            var users = await GetUsersAsync();
             bool userExists = (from u in users
                                where u.Email == input.Email
                                select u).ToList().Count > 0;
@@ -124,7 +124,7 @@ namespace FantasyApi.Services
         /// <exception cref="UserDoesntExistException"></exception>
         public async Task<UserDto> UpdateUserAsync(UserUpdateInput input)
         {
-            var user = await GetUserById(input.Id);
+            var user = await GetUserByIdAsync(input.Id);
             if (user == null)
             {
                 throw new UserDoesntExistException();
@@ -153,7 +153,7 @@ namespace FantasyApi.Services
         /// <exception cref="UserDoesntExistException"></exception>
         public async Task DeleteUserAsync(int id)
         {
-            var user = await GetUserById(id);
+            var user = await GetUserByIdAsync(id);
             if (user == null)
             {
                 throw new UserDoesntExistException();

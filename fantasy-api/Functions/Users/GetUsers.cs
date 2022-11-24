@@ -25,7 +25,7 @@ namespace FantasyApi.Functions.Users
         {
             async Task<IActionResult> Action(BaseRequest filter)
             {
-                var data = await _userService.GetAllUsersPaginatedAsync(filter);
+                var data = await _userService.GetUsersPaginatedAsync(filter);
                 return new OkObjectResult(data);
             }
 

@@ -12,11 +12,11 @@ namespace FantasyApi.Interfaces
     {
         Task<UserDto> GetUserByMailAndPassAsync(LoginInput input);
 
-        Task<UserDto> GetUserById(int id);
+        Task<UserDto> GetUserByIdAsync(int id);
 
-        Task<IEnumerable<UserDto>> GetAllUsersAsync();
+        Task<IEnumerable<UserDto>> GetUsersAsync();
 
-        Task<PaginatedListDto<UserDto>> GetAllUsersPaginatedAsync(BaseRequest filter);
+        Task<PaginatedListDto<UserDto>> GetUsersPaginatedAsync(BaseRequest filter);
 
         /// <exception cref="UserExistsException"></exception>
         Task<UserDto> AddUserAsync(UserAddInput input);

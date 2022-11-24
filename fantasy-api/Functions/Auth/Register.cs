@@ -29,7 +29,7 @@ namespace FantasyApi.Functions.Auth
             {
                 try
                 {
-                    var result = await _authService.Register(input);
+                    var result = await _authService.RegisterAsync(input);
                     return new OkObjectResult(result);
                 }
                 catch (UserExistsException)
