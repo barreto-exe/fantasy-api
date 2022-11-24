@@ -8,7 +8,6 @@ namespace FantasyApi.Data.Events.Inputs
     {
         [Required]
         public string EventName { get; set; }
-        [Required]
         public IFormFile Img { get; set; }
         [Required]
         public bool Active { get; set; }
