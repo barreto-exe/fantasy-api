@@ -1,4 +1,4 @@
-using FantasyApi.Data.Users.Exceptions;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
@@ -32,7 +32,7 @@ namespace FantasyApi.Functions.Users
                     var result = await _userService.AddUserAsync(input);
                     return new OkObjectResult(ResponsesBuilder.CreationResponse("USER_CREATED", result));
                 }
-                catch (UserExistsException)
+                catch (AlreadyExistsException)
                 {
                     return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EMAIL_ALREADY_EXISTS"));
                 }

@@ -1,4 +1,4 @@
-using FantasyApi.Data.Users.Exceptions;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
@@ -34,7 +34,7 @@ namespace FantasyApi.Functions.Users
                     var result = await _userService.UpdateUserAsync(input);
                     return new OkObjectResult(ResponsesBuilder.CreationResponse("USER_UPDATED", result));
                 }
-                catch (UserDoesntExistException)
+                catch (NotFoundException)
                 {
                     return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("USER_DOESNT_EXIST"));
                 }

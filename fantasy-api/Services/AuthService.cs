@@ -1,6 +1,6 @@
 ﻿using FantasyApi.Data.Auth.Dtos;
 using FantasyApi.Data.Auth.Inputs;
-using FantasyApi.Data.Users.Exceptions;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +23,7 @@ namespace FantasyApi.Services
             _userService = userService;
         }
 
-        /// <exception cref="UserExistsException"></exception>
+        /// <exception cref="AlreadyExistsException"></exception>
         public async Task<LoginDto> RegisterAsync(RegisterInput input)
         {
             try
@@ -37,7 +37,7 @@ namespace FantasyApi.Services
                     Password = input.Password,
                 });
             }
-            catch (UserExistsException ex)
+            catch (AlreadyExistsException ex)
             {
                 throw ex;
             }

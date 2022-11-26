@@ -1,4 +1,4 @@
-using FantasyApi.Data.Events.Exceptions;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Events.Inputs;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
@@ -32,7 +32,7 @@ namespace FantasyApi.Functions.Events
                     var result = await _eventService.AddEventAsync(input);
                     return new OkObjectResult(ResponsesBuilder.CreationResponse("EVENT_CREATED", result));
                 }
-                catch (EventExistsException)
+                catch (AlreadyExistsException)
                 {
                     return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EVENT_ALREADY_EXISTS"));
                 }

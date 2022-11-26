@@ -12,17 +12,17 @@ using System.Threading.Tasks;
 
 namespace FantasyApi.Functions.Users
 {
-    public class DeleteUsers
+    public class DeleteEvents
     {
-        private readonly IUserService _userService;
-        public DeleteUsers(IUserService userService)
+        private readonly IEventService _eventService;
+        public DeleteEvents(IEventService eventService)
         {
-            _userService = userService;
+            _eventService = eventService;
         }
 
-        [FunctionName("DeleteUsers")]
+        [FunctionName("DeleteEvents")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "users/{id:int}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "events/{id:int}")] HttpRequest req,
             int id,
             ILogger log)
         {
@@ -30,12 +30,12 @@ namespace FantasyApi.Functions.Users
             {
                 try
                 {
-                    await _userService.DeleteUserAsync(id);
-                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("USER_DELETED"));
+                    await _eventService.DeleteEventAsync(id);
+                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("EVENT_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("USER_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
                 }
             }
 

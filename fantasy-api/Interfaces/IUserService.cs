@@ -1,5 +1,6 @@
 ﻿using FantasyApi.Data.Auth.Inputs;
 using FantasyApi.Data.Base.Dtos;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Users.Dtos;
 using FantasyApi.Data.Users.Inputs;
@@ -18,13 +19,13 @@ namespace FantasyApi.Interfaces
 
         Task<PaginatedListDto<UserDto>> GetUsersPaginatedAsync(BaseRequest filter);
 
-        /// <exception cref="UserExistsException"></exception>
+        /// <exception cref="AlreadyExistsException"></exception>
         Task<UserDto> AddUserAsync(UserAddInput input);
 
-        /// <exception cref="UserDoesntExistException"></exception>
+        /// <exception cref="NotFoundException"></exception>
         Task<UserDto> UpdateUserAsync(UserUpdateInput input);
 
-        /// <exception cref="UserDoesntExistException"></exception>
+        /// <exception cref="NotFoundException"></exception>
         Task DeleteUserAsync(int id);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FantasyApi.Data.Base.Requests;
-using FantasyApi.Data.Events.Inputs;
 using FantasyApi.Utils;
 using FantasyApi.Utils.JWT;
 using FantasyApi.Utils.JWT.Enum;

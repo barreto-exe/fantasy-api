@@ -1,9 +1,9 @@
 ﻿using Core.Utils.Mapping;
 using FantasyApi.Data.Auth.Inputs;
 using FantasyApi.Data.Base.Dtos;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Users.Dtos;
-using FantasyApi.Data.Users.Exceptions;
 using FantasyApi.Data.Users.Inputs;
 using FantasyApi.Interfaces;
 using MySqlConnector;
@@ -87,14 +87,14 @@ namespace FantasyApi.Services
             }
         }
 
-        /// <exception cref="UserExistsException"></exception>
+        /// <exception cref="AlreadyExistsException"></exception>
         public async Task<UserDto> AddUserAsync(UserAddInput input)
         {
             //Validate if email has already been used
             var userWithEmail = (await GetUsersAsync())?.FirstOrDefault(x => x.Email == input.Email);
             if (userWithEmail != null)
             {
-                throw new UserExistsException();
+                throw new AlreadyExistsException("User with the requested email");
             }
 
             List<MySqlParameter> parameters = new()
@@ -116,13 +116,13 @@ namespace FantasyApi.Services
             });
         }
 
-        /// <exception cref="UserDoesntExistException"></exception>
+        /// <exception cref="NotFoundException"></exception>
         public async Task<UserDto> UpdateUserAsync(UserUpdateInput input)
         {
             var user = await GetUserByIdAsync(input.Id);
             if (user == null)
             {
-                throw new UserDoesntExistException();
+                throw new NotFoundException("User with the requested id");
             }
 
             List<MySqlParameter> parameters = new()
@@ -145,13 +145,13 @@ namespace FantasyApi.Services
             });
         }
 
-        /// <exception cref="UserDoesntExistException"></exception>
+        /// <exception cref="NotFoundException"></exception>
         public async Task DeleteUserAsync(int id)
         {
             var user = await GetUserByIdAsync(id);
             if (user == null)
             {
-                throw new UserDoesntExistException();
+                throw new NotFoundException("User with the requested id");
             }
 
             List<MySqlParameter> parameters = new()

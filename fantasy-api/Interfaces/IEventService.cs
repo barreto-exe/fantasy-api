@@ -1,4 +1,5 @@
 ﻿using FantasyApi.Data.Base.Dtos;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Events.Dtos;
 using FantasyApi.Data.Events.Inputs;
@@ -13,7 +14,13 @@ namespace FantasyApi.Interfaces
 
         Task<PaginatedListDto<EventDto>> GetEventsPaginatedAsync(BaseRequest input);
 
-        /// <exception cref="EventExistsException"></exception>
+        /// <exception cref="AlreadyExistsException"></exception>
         Task<EventDto> AddEventAsync(EventAddInput input);
+
+        /// <exception cref="NotFoundException"></exception>
+        Task<EventDto> UpdateEventAsync(EventUpdateInput input);
+
+        /// <exception cref="NotFoundException"></exception>
+        Task DeleteEventAsync(int id);
     }
 }

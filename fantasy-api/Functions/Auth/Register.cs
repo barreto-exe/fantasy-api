@@ -1,5 +1,5 @@
 using FantasyApi.Data.Auth.Inputs;
-using FantasyApi.Data.Users.Exceptions;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
 using FantasyApi.Utils.JWT.Enum;
@@ -32,7 +32,7 @@ namespace FantasyApi.Functions.Auth
                     var result = await _authService.RegisterAsync(input);
                     return new OkObjectResult(result);
                 }
-                catch (UserExistsException)
+                catch (AlreadyExistsException)
                 {
                     return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EMAIL_ALREADY_EXISTS"));
                 }

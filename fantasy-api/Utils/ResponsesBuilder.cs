@@ -9,6 +9,7 @@ namespace FantasyApi.Utils
         {
             return new ErrorDto()
             {
+                Success = false,
                 Code = errorCode,
             };
         }
@@ -29,10 +30,11 @@ namespace FantasyApi.Utils
             };
         }
 
-        public static CreationDto<T> CreationResponse<T>(string message, T item)
+        public static CreationDto<T> CreationResponse<T>(string message, T item, bool success = true)
         {
             return new CreationDto<T>
             {
+                Success = success,
                 Message = message,
                 Item = item,
             };
