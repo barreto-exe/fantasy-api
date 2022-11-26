@@ -1,4 +1,5 @@
 ﻿using FantasyApi.Data.Base.Requests;
+using FantasyApi.Data.Events.Inputs;
 using FantasyApi.Utils;
 using FantasyApi.Utils.JWT;
 using FantasyApi.Utils.JWT.Enum;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -57,7 +59,8 @@ namespace FantasyApi.Functions
                             {
                                 input = req.Form.ToObject<TInput>();
 
-                                foreach (var file in req.Form.Files)
+                                var files = req.Form.Files.ToList();
+                                foreach (var file in files)
                                 {
                                     var settings = BindingFlags.Instance |
                                         BindingFlags.Public |
