@@ -1,5 +1,4 @@
-﻿using Core.Utils.Mapping;
-using FantasyApi.Data.Base.Dtos;
+﻿using FantasyApi.Data.Base.Dtos;
 using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Base.Requests;
 using FantasyApi.Data.Events.Dtos;

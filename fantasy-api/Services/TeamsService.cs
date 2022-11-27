@@ -4,14 +4,11 @@ using FantasyApi.Data.Teams.Dtos;
 using FantasyApi.Data.Teams.Filters;
 using FantasyApi.Data.Teams.Inputs;
 using FantasyApi.Interfaces;
-using Microsoft.AspNetCore.Mvc.Routing;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FantasyApi.Services
@@ -41,7 +38,7 @@ namespace FantasyApi.Services
                                select Convert.ToInt32(r[0]);
 
                 dto.EventIds = eventIds;
-                
+
                 return dto;
             }
             else
@@ -49,7 +46,7 @@ namespace FantasyApi.Services
                 return null;
             }
         }
-        
+
         public async Task<IEnumerable<TeamDto>> GetTeamsAsync(TeamsFilter filter)
         {
             var dtos = (await GetItemsAsync<TeamDto>("GetTeams")).ToList();
@@ -63,7 +60,7 @@ namespace FantasyApi.Services
                                 select item.EventId;
             });
 
-            if(filter.EventId != null)
+            if (filter.EventId != null)
             {
                 bool hasInvalidEvent = await HasInvalidEvent(filter.EventId.ToString());
                 if (hasInvalidEvent)

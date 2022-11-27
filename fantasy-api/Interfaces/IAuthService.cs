@@ -1,7 +1,7 @@
 ﻿using FantasyApi.Data.Auth.Dtos;
 using FantasyApi.Data.Auth.Inputs;
-using System.Threading.Tasks;
 using FantasyApi.Data.Base.Exceptions;
+using System.Threading.Tasks;
 
 namespace FantasyApi.Interfaces
 {
