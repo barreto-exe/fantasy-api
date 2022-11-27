@@ -1,4 +1,5 @@
 ﻿using Core.Utils.Mapping;
+using FantasyApi.Data.Base.Dtos;
 using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Teams.Dtos;
 using FantasyApi.Data.Teams.Filters;
@@ -74,6 +75,36 @@ namespace FantasyApi.Services
             return dtos;
         }
 
+        public async Task<PaginatedListDto<TeamDto>> GetTeamsPaginatedAsync(TeamsFilter filter)
+        {
+            var dtos = await GetItemsPaginatedAsync<TeamDto>(filter, "GetTeamsPaginated");
+
+            var teamsByEvent = await GetTeamsByEvent();
+
+            var items = dtos.Items.ToList();
+            items.ForEach(team =>
+            {
+                team.EventIds = from item in teamsByEvent
+                                where item.TeamId == team.Id
+                                select item.EventId;
+            });
+
+            dtos.Items = items;
+
+            if (filter.EventId != null)
+            {
+                bool hasInvalidEvent = await HasInvalidEvent(filter.EventId.ToString());
+                if (hasInvalidEvent)
+                {
+                    throw new NotFoundException("Event id");
+                }
+
+                dtos.Items = dtos.Items.ToList().Where(x => x.EventIds.ToList().Contains((int)filter.EventId));
+            }
+
+            return dtos;
+        }
+
         private async Task<IEnumerable<TeamByEventDto>> GetTeamsByEvent()
         {
             var cmd = _databaseService.GetCommand("GetTeamsByEvent");
@@ -137,6 +168,18 @@ namespace FantasyApi.Services
                                     where inputEvents.Contains(e.Id.ToString())
                                     select e).Count() != inputEvents.Length;
             return hasInvalidEvent;
+        }
+
+        /// <exception cref="NotFoundException"></exception>
+        public async Task DeleteTeamAsync(int id)
+        {
+            var item = await GetTeamByIdAsync(id);
+            if (item == null)
+            {
+                throw new NotFoundException("Team with the requested id");
+            }
+
+            await DeleteItemAsync("DeleteTeam", "idTeam", id);
         }
     }
 }
