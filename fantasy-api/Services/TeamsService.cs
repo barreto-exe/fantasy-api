@@ -160,6 +160,7 @@ namespace FantasyApi.Services
             }
         }
 
+        /// <exception cref="NotFoundException"></exception>
         public async Task<TeamDto> UpdateTeamAsync(TeamUpdateInput input)
         {
             var oldTeam = await GetTeamByIdAsync(input.Id);

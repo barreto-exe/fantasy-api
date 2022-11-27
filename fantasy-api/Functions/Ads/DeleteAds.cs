@@ -10,19 +10,19 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace FantasyApi.Functions.Teams
+namespace FantasyApi.Functions.Ads
 {
-    public class DeleteTeams
+    public class DeleteAds
     {
-        private readonly ITeamsService _teamsService;
-        public DeleteTeams(ITeamsService teamsService)
+        private readonly IAdService _adService;
+        public DeleteAds(IAdService adService)
         {
-            _teamsService = teamsService;
+            _adService = adService;
         }
 
-        [FunctionName("DeleteTeams")]
+        [FunctionName("DeleteAds")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "teams/{id:int}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "ads/{id:int}")] HttpRequest req,
             int id,
             ILogger log)
         {
@@ -30,12 +30,12 @@ namespace FantasyApi.Functions.Teams
             {
                 try
                 {
-                    await _teamsService.DeleteTeamAsync(id);
-                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("TEAM_DELETED"));
+                    await _adService.DeleteAdAsync(id);
+                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("AD_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("TEAM_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("AD_DOESNT_EXIST"));
                 }
             }
 

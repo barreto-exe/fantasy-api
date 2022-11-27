@@ -1,10 +1,10 @@
 ﻿using FantasyApi.Data.Base.Dtos;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Teams.Dtos;
 using FantasyApi.Data.Teams.Filters;
 using FantasyApi.Data.Teams.Inputs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FantasyApi.Data.Base.Exceptions;
 
 namespace FantasyApi.Interfaces
 {
@@ -18,7 +18,7 @@ namespace FantasyApi.Interfaces
 
         /// <exception cref="NotFoundException"></exception>
         Task<TeamDto> AddTeamAsync(TeamAddInput input);
-        
+
         /// <exception cref="NotFoundException"></exception>
         Task<TeamDto> UpdateTeamAsync(TeamUpdateInput input);
 
