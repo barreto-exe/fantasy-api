@@ -32,11 +32,11 @@ namespace FantasyApi.Functions.Users
                 {
                     input.Id = id;
                     var result = await _userService.UpdateUserAsync(input);
-                    return new OkObjectResult(ResponsesBuilder.CreationResponse("USER_UPDATED", result));
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("USER_UPDATED", result));
                 }
                 catch (NotFoundException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("USER_DOESNT_EXIST"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("USER_DOESNT_EXIST"));
                 }
             }
 

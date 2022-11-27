@@ -30,11 +30,11 @@ namespace FantasyApi.Functions.Teams
                 try
                 {
                     var result = await _teamService.AddTeamAsync(input);
-                    return new OkObjectResult(ResponsesBuilder.CreationResponse("TEAM_CREATED", result));
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("TEAM_CREATED", result));
                 }
                 catch (NotFoundException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EVENT_NOT_FOUND"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("EVENT_NOT_FOUND"));
                 }
             }
 

@@ -31,11 +31,11 @@ namespace FantasyApi.Functions.Teams
                 try
                 {
                     await _teamsService.DeleteTeamAsync(id);
-                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("TEAM_DELETED"));
+                    return new OkObjectResult(ResponseBuilder.GeneralResponse("TEAM_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("TEAM_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponseBuilder.ErrorResponse("TEAM_DOESNT_EXIST"));
                 }
             }
 

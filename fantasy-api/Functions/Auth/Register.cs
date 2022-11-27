@@ -34,7 +34,7 @@ namespace FantasyApi.Functions.Auth
                 }
                 catch (AlreadyExistsException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EMAIL_ALREADY_EXISTS"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("EMAIL_ALREADY_EXISTS"));
                 }
             }
 

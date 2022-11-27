@@ -31,11 +31,11 @@ namespace FantasyApi.Functions.Users
                 try
                 {
                     await _userService.DeleteUserAsync(id);
-                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("USER_DELETED"));
+                    return new OkObjectResult(ResponseBuilder.GeneralResponse("USER_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("USER_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponseBuilder.ErrorResponse("USER_DOESNT_EXIST"));
                 }
             }
 

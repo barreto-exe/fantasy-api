@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FantasyApi.Utils
 {
-    public static class ResponsesBuilder
+    public static class ResponseBuilder
     {
         public static ErrorDto ErrorResponse(string errorCode)
         {
@@ -40,7 +40,7 @@ namespace FantasyApi.Utils
             };
         }
 
-        public static DeletionDto DeletionResponse(string message, bool success = true)
+        public static DeletionDto GeneralResponse(string message, bool success = true)
         {
             return new DeletionDto()
             {

@@ -10,29 +10,27 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace FantasyApi.Functions.Ads
+namespace FantasyApi.Functions.Ads.Public
 {
-    public class PutAds
+    public class PostPublicAdClick
     {
         private readonly IAdService _adService;
-        public PutAds(IAdService adService)
+        public PostPublicAdClick(IAdService adService)
         {
             _adService = adService;
         }
 
-        [FunctionName("PutAds")]
+        [FunctionName("PostPublicAdClick")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "promotions/{id:int}")] HttpRequest req,
-            int id,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "public-promotion/click")] HttpRequest req,
             ILogger log)
         {
-            async Task<IActionResult> Action(AdUpdateInput input)
+            async Task<IActionResult> Action(AdClickInput input)
             {
                 try
                 {
-                    input.Id = id;
-                    var result = await _adService.UpdateAdAsync(input);
-                    return new OkObjectResult(ResponseBuilder.CreationResponse("AD_UPDATED", result));
+                    await _adService.AddAdClickAsync(input.Id);
+                    return new OkObjectResult(ResponseBuilder.GeneralResponse("AD_CLICKED"));
                 }
                 catch (NotFoundException)
                 {
@@ -40,7 +38,7 @@ namespace FantasyApi.Functions.Ads
                 }
             }
 
-            return await RequestHandler.Handle<AdUpdateInput>(req, log, Action, RoleEnum.Admin, BodyTypeEnum.Formdata);
+            return await RequestHandler.Handle<AdClickInput>(req, log, Action, RoleEnum.User);
         }
     }
 }

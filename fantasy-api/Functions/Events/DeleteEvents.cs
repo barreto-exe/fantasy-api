@@ -31,11 +31,11 @@ namespace FantasyApi.Functions.Users
                 try
                 {
                     await _eventService.DeleteEventAsync(id);
-                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("EVENT_DELETED"));
+                    return new OkObjectResult(ResponseBuilder.GeneralResponse("EVENT_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponseBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
                 }
             }
 

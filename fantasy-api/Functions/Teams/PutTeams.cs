@@ -32,11 +32,11 @@ namespace FantasyApi.Functions.Teams
                 {
                     input.Id = id;
                     var result = await _teamService.UpdateTeamAsync(input);
-                    return new OkObjectResult(ResponsesBuilder.CreationResponse("TEAM_UPDATED", result));
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("TEAM_UPDATED", result));
                 }
                 catch (NotFoundException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("TEAM_DOESNT_EXIST"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("TEAM_DOESNT_EXIST"));
                 }
             }
 

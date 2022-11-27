@@ -31,11 +31,11 @@ namespace FantasyApi.Functions.Ads
                 try
                 {
                     await _adService.DeleteAdAsync(id);
-                    return new OkObjectResult(ResponsesBuilder.DeletionResponse("AD_DELETED"));
+                    return new OkObjectResult(ResponseBuilder.GeneralResponse("AD_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponsesBuilder.ErrorResponse("AD_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponseBuilder.ErrorResponse("AD_DOESNT_EXIST"));
                 }
             }
 

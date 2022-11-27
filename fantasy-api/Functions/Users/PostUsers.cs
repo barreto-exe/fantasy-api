@@ -30,11 +30,11 @@ namespace FantasyApi.Functions.Users
                 try
                 {
                     var result = await _userService.AddUserAsync(input);
-                    return new OkObjectResult(ResponsesBuilder.CreationResponse("USER_CREATED", result));
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("USER_CREATED", result));
                 }
                 catch (AlreadyExistsException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EMAIL_ALREADY_EXISTS"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("EMAIL_ALREADY_EXISTS"));
                 }
             }
 

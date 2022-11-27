@@ -13,5 +13,8 @@ namespace FantasyApi.Interfaces
         Task<AdDto> AddAdAsync(AdAddInput input);
         Task<AdDto> UpdateAdAsync(AdUpdateInput input);
         Task DeleteAdAsync(int id);
+
+        Task<AdForUserDto> GetAdByRandomRequestAsync();
+        Task AddAdClickAsync(int id);
     }
 }

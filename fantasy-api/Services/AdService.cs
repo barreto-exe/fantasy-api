@@ -106,5 +106,26 @@ namespace FantasyApi.Services
             await DeleteItemAsync("DeleteAd", "ad_id", id);
         }
 
+        public async Task<AdForUserDto> GetAdByRandomRequestAsync()
+        {
+            return await GetItemByIdAsync<AdForUserDto>("GetAdByRandomRequest");
+        }
+
+        public async Task AddAdClickAsync(int id)
+        {
+            var selected = await GetAdByIdAsync(id);
+            if (selected == null)
+            {
+                throw new NotFoundException("Ad with the requested id");
+            }
+
+            List<MySqlParameter> parameters = new()
+            {
+                new MySqlParameter("selectedId", id),
+            };
+
+            var cmd = _databaseService.GetCommand("AddAdClick", parameters);
+            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
+        }
     }
 }

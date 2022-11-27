@@ -27,7 +27,7 @@ namespace FantasyApi.Functions.Ads
             async Task<IActionResult> Action(AdAddInput input)
             {
                 var result = await _adService.AddAdAsync(input);
-                return new OkObjectResult(ResponsesBuilder.CreationResponse("AD_CREATED", result));
+                return new OkObjectResult(ResponseBuilder.CreationResponse("AD_CREATED", result));
             }
 
             return await RequestHandler.Handle<AdAddInput>(req, log, Action, RoleEnum.Admin, BodyTypeEnum.Formdata);

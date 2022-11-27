@@ -32,11 +32,11 @@ namespace FantasyApi.Functions.Events
                 {
                     input.Id = id;
                     var result = await _eventService.UpdateEventAsync(input);
-                    return new OkObjectResult(ResponsesBuilder.CreationResponse("EVENT_UPDATED", result));
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("EVENT_UPDATED", result));
                 }
                 catch (NotFoundException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
                 }
             }
 

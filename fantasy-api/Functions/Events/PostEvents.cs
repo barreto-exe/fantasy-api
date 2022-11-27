@@ -30,11 +30,11 @@ namespace FantasyApi.Functions.Events
                 try
                 {
                     var result = await _eventService.AddEventAsync(input);
-                    return new OkObjectResult(ResponsesBuilder.CreationResponse("EVENT_CREATED", result));
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("EVENT_CREATED", result));
                 }
                 catch (AlreadyExistsException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EVENT_ALREADY_EXISTS"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("EVENT_ALREADY_EXISTS"));
                 }
             }
 

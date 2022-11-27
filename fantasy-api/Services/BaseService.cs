@@ -38,7 +38,7 @@ namespace FantasyApi.Services
                 int totalPages = (int)data.Tables[1].Rows[0]["totalPages"];
                 int size = (int)data.Tables[1].Rows[0]["size"];
 
-                return ResponsesBuilder.PaginatedListResponse(users, totalRows, page, totalPages, size);
+                return ResponseBuilder.PaginatedListResponse(users, totalRows, page, totalPages, size);
             }
             else
             {
@@ -63,12 +63,16 @@ namespace FantasyApi.Services
             }
         }
 
-        protected async Task<T> GetItemByIdAsync<T>(string spName, string spVarName, int id) where T : class, new()
+        protected async Task<T> GetItemByIdAsync<T>(string spName, string spVarName = null, int? id = null) where T : class, new()
         {
-            List<MySqlParameter> parameters = new()
+            List<MySqlParameter> parameters = null;
+            if (!string.IsNullOrEmpty(spVarName) && id != null)
             {
-                new MySqlParameter(spVarName, id),
-            };
+                parameters = new()
+                {
+                    new MySqlParameter(spVarName, id),
+                };
+            }
 
             var cmd = _databaseService.GetCommand(spName, parameters);
             var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);

@@ -30,7 +30,7 @@ namespace FantasyApi.Functions.Auth
 
                 if (data == null)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("NO_PASSWORD_MATCH"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("NO_PASSWORD_MATCH"));
                 }
 
                 return new OkObjectResult(data);
