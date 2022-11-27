@@ -4,7 +4,7 @@ using System;
 
 namespace FantasyApi.Data.Ads.Dtos
 {
-    public class AdDto : BaseRequest
+    public class AdDto
     {
         [DataNames("id")]
         public int Id { get; set; }

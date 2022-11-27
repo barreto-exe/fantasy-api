@@ -3,7 +3,7 @@ using FantasyApi.DataAnotations;
 
 namespace FantasyApi.Data.Ads.Dtos
 {
-    public class AdForUserDto : BaseRequest
+    public class AdForUserDto
     {
         [DataNames("id")]
         public int Id { get; set; }
