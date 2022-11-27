@@ -1,6 +1,8 @@
 ﻿using Core.Utils.Mapping;
 using FantasyApi.Data.Base.Dtos;
+using FantasyApi.Data.Base.Exceptions;
 using FantasyApi.Data.Base.Requests;
+using FantasyApi.Data.Events.Dtos;
 using FantasyApi.Interfaces;
 using FantasyApi.Utils;
 using MySqlConnector;
@@ -17,7 +19,7 @@ namespace FantasyApi.Services
             _databaseService = databaseService;
         }
 
-        protected async Task<PaginatedListDto<T>> GetItemsPaginated<T>(BaseRequest filter, string spName) where T : class, new()
+        protected async Task<PaginatedListDto<T>> GetItemsPaginatedAsync<T>(BaseRequest filter, string spName) where T : class, new()
         {
             List<MySqlParameter> parameters = new()
             {
@@ -44,6 +46,56 @@ namespace FantasyApi.Services
             {
                 return null;
             }
+        }
+
+        protected async Task<IEnumerable<T>> GetItemsAsync<T>(string spName) where T : class, new()
+        {
+            var cmd = _databaseService.GetCommand(spName);
+            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
+
+            if (data.Rows.Count > 0)
+            {
+                var mapper = new DataNamesMapper<T>();
+                var items = mapper.Map(data);
+                return items;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        protected async Task<T> GetItemByIdAsync<T>(string spName, string spVarName, int id) where T : class, new()
+        {
+            List<MySqlParameter> parameters = new()
+            {
+                new MySqlParameter(spVarName, id),
+            };
+
+            var cmd = _databaseService.GetCommand(spName, parameters);
+            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
+
+            if (data.Rows.Count > 0)
+            {
+                var mapper = new DataNamesMapper<T>();
+                var item = mapper.Map(data.Rows[0]);
+                return item;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task DeleteItemAsync(string spName, string spVarName, int id)
+        {
+            List<MySqlParameter> parameters = new()
+            {
+                new MySqlParameter(spVarName, id),
+            };
+
+            var cmd = _databaseService.GetCommand(spName, parameters);
+            await _databaseService.ExecuteStoredProcedureAsync(cmd);
         }
     }
 }

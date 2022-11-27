@@ -19,48 +19,15 @@ namespace FantasyApi.Services
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            List<MySqlParameter> parameters = new()
-            {
-                new MySqlParameter("idUser", id),
-            };
-
-            var cmd = _databaseService.GetCommand("GetUserById", parameters);
-            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
-
-            if (data.Rows.Count > 0)
-            {
-                var mapper = new DataNamesMapper<UserDto>();
-                var user = mapper.Map(data.Rows[0]);
-
-                return user;
-            }
-            else
-            {
-                return null;
-            }
+            return await GetItemByIdAsync<UserDto>("GetUserById", "idUser", id);
         }
-
         public async Task<IEnumerable<UserDto>> GetUsersAsync()
         {
-            var cmd = _databaseService.GetCommand("GetUsers");
-            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
-
-            if (data.Rows.Count > 0)
-            {
-                var mapper = new DataNamesMapper<UserDto>();
-                var user = mapper.Map(data);
-
-                return user;
-            }
-            else
-            {
-                return null;
-            }
+            return await GetItemsAsync<UserDto>("GetUsers");
         }
-
         public async Task<PaginatedListDto<UserDto>> GetUsersPaginatedAsync(BaseRequest filter)
         {
-            return await GetItemsPaginated<UserDto>(filter, "GetUsersPaginated");
+            return await GetItemsPaginatedAsync<UserDto>(filter, "GetUsersPaginated");
         }
 
         public async Task<UserDto> GetUserByMailAndPassAsync(LoginInput input)

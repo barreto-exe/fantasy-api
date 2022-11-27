@@ -23,46 +23,17 @@ namespace FantasyApi.Services
 
         public async Task<EventDto> GetEventByIdAsync(int id)
         {
-            List<MySqlParameter> parameters = new()
-            {
-                new MySqlParameter("eventId", id),
-            };
-
-            var cmd = _databaseService.GetCommand("GetEventById", parameters);
-            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
-
-            if (data.Rows.Count > 0)
-            {
-                var mapper = new DataNamesMapper<EventDto>();
-                var @event = mapper.Map(data.Rows[0]);
-                return @event;
-            }
-            else
-            {
-                return null;
-            }
+            return await GetItemByIdAsync<EventDto>("GetEventById", "eventId", id);
         }
 
         public async Task<IEnumerable<EventDto>> GetEventsAsync()
         {
-            var cmd = _databaseService.GetCommand("GetEvents");
-            var data = await _databaseService.ExecuteStoredProcedureAsync(cmd);
-
-            if (data.Rows.Count > 0)
-            {
-                var mapper = new DataNamesMapper<EventDto>();
-                var events = mapper.Map(data);
-                return events;
-            }
-            else
-            {
-                return null;
-            }
+            return await GetItemsAsync<EventDto>("GetEvents");
         }
 
         public async Task<PaginatedListDto<EventDto>> GetEventsPaginatedAsync(BaseRequest filter)
         {
-            return await GetItemsPaginated<EventDto>(filter, "GetEventsPaginated");
+            return await GetItemsPaginatedAsync<EventDto>(filter, "GetEventsPaginated");
         }
 
         /// <exception cref="AlreadyExistsException"></exception>
@@ -96,8 +67,7 @@ namespace FantasyApi.Services
             if (data.Rows.Count > 0)
             {
                 int newId = Convert.ToInt32(data.Rows[0][0]);
-                var dto = (await GetEventsAsync()).FirstOrDefault(x => x.Id == newId);
-                return dto;
+                return await GetEventByIdAsync(newId);
             }
             else
             {
@@ -146,13 +116,7 @@ namespace FantasyApi.Services
                 throw new NotFoundException("Event with the requested id");
             }
 
-            List<MySqlParameter> parameters = new()
-            {
-                new MySqlParameter("idEv", id),
-            };
-
-            var cmd = _databaseService.GetCommand("DeleteEvent", parameters);
-            await _databaseService.ExecuteStoredProcedureAsync(cmd);
+            await DeleteItemAsync("DeleteEvent", "idEv", id);
         }
     }
 }
