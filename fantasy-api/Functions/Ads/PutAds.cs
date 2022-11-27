@@ -22,7 +22,7 @@ namespace FantasyApi.Functions.Ads
 
         [FunctionName("PutAds")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "ads/{id:int}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "promotions/{id:int}")] HttpRequest req,
             int id,
             ILogger log)
         {

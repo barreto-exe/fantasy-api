@@ -21,7 +21,7 @@ namespace FantasyApi.Functions.Ads
 
         [FunctionName("PostAds")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "ads")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "promotions")] HttpRequest req,
             ILogger log)
         {
             async Task<IActionResult> Action(AdAddInput input)

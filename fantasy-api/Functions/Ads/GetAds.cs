@@ -20,7 +20,7 @@ namespace FantasyApi.Functions.Ads
 
         [FunctionName("GetAds")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "ads")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "promotions")] HttpRequest req,
             ILogger log)
         {
             async Task<IActionResult> Action(BaseRequest filter)

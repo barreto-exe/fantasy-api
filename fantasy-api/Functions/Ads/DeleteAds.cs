@@ -22,7 +22,7 @@ namespace FantasyApi.Functions.Ads
 
         [FunctionName("DeleteAds")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "ads/{id:int}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "promotions/{id:int}")] HttpRequest req,
             int id,
             ILogger log)
         {
