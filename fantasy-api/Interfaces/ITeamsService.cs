@@ -18,6 +18,9 @@ namespace FantasyApi.Interfaces
 
         /// <exception cref="NotFoundException"></exception>
         Task<TeamDto> AddTeamAsync(TeamAddInput input);
+        
+        /// <exception cref="NotFoundException"></exception>
+        Task<TeamDto> UpdateTeamAsync(TeamUpdateInput input);
 
         /// <exception cref="NotFoundException"></exception>
         Task DeleteTeamAsync(int id);

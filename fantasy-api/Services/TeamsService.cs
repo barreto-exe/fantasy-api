@@ -160,6 +160,37 @@ namespace FantasyApi.Services
             }
         }
 
+        public async Task<TeamDto> UpdateTeamAsync(TeamUpdateInput input)
+        {
+            var oldTeam = await GetTeamByIdAsync(input.Id);
+            if (oldTeam == null)
+            {
+                throw new NotFoundException("Team with the requested id");
+            }
+
+            List<MySqlParameter> parameters = new()
+            {
+                new MySqlParameter("idteam", input.Id),
+                new MySqlParameter("name_team", input.Name ?? oldTeam.Name),
+                new MySqlParameter("event_ids", input.EventIds ?? string.Join(",", oldTeam.EventIds)),
+            };
+
+            if (input.Badge != null)
+            {
+                var blob = await _storageService.UploadAsync(input.Badge);
+                parameters.Add(new MySqlParameter("badge_team", blob.Blob.Uri));
+            }
+            else
+            {
+                parameters.Add(new MySqlParameter("badge_team", oldTeam.Badge));
+            }
+
+            var cmd = _databaseService.GetCommand("UpdateTeam", parameters);
+            await _databaseService.ExecuteStoredProcedureAsync(cmd);
+
+            return await GetTeamByIdAsync(input.Id);
+        }
+
         private async Task<bool> HasInvalidEvent(string eventIds)
         {
             var inputEvents = eventIds.Split(",");
@@ -167,7 +198,7 @@ namespace FantasyApi.Services
             bool hasInvalidEvent = (from e in events
                                     where inputEvents.Contains(e.Id.ToString())
                                     select e).Count() != inputEvents.Length;
-            return hasInvalidEvent;
+            return hasInvalidEvent || string.IsNullOrEmpty(eventIds);
         }
 
         /// <exception cref="NotFoundException"></exception>

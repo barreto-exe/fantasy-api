@@ -36,7 +36,7 @@ namespace FantasyApi.Functions.Events
                 }
                 catch (NotFoundException)
                 {
-                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EVENT_DOESNT_EXISTS"));
+                    return new BadRequestObjectResult(ResponsesBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
                 }
             }
 

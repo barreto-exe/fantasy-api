@@ -10,6 +10,8 @@ namespace FantasyApi.Data.Teams.Dtos
         public int Id { get; set; }
         [DataNames("name")]
         public string Name { get; set; }
+        [DataNames("badge_url")]
+        public string Badge { get; set; }
         public IEnumerable<int> EventIds { get; set; }
         [DataNames("creation_date")]
         public DateTime CreatedAt { get; set; }
