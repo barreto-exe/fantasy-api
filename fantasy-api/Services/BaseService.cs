@@ -63,7 +63,7 @@ namespace FantasyApi.Services
             }
         }
 
-        protected async Task<T> GetItemByIdAsync<T>(string spName, string spVarName = null, int? id = null) where T : class, new()
+        protected async Task<T> GetItemByIdAsync<T>(string spName, string spVarName = null, object id = null) where T : class, new()
         {
             List<MySqlParameter> parameters = null;
             if (!string.IsNullOrEmpty(spVarName) && id != null)

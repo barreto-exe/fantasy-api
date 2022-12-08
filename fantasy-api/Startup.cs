@@ -21,6 +21,7 @@ namespace FantasyApi
             builder.Services.AddTransient<IAzureStorageService, AzureStorage>();
             builder.Services.AddTransient<ITeamsService, TeamsService>();
             builder.Services.AddTransient<IAdService, AdService>();
+            builder.Services.AddTransient<ISoccerPlayerService, SoccerPlayerService>();
         }
     }
 }

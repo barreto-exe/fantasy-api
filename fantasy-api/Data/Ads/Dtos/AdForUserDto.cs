@@ -1,5 +1,4 @@
-﻿using FantasyApi.Data.Base.Requests;
-using FantasyApi.DataAnotations;
+﻿using FantasyApi.DataAnotations;
 
 namespace FantasyApi.Data.Ads.Dtos
 {
