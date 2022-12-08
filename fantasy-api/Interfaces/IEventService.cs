@@ -12,6 +12,8 @@ namespace FantasyApi.Interfaces
     {
         Task<IEnumerable<EventDto>> GetEventsAsync();
 
+        Task<EventDto> GetEventByIdAsync(int id);
+
         Task<PaginatedListDto<EventDto>> GetEventsPaginatedAsync(BaseRequest input);
 
         /// <exception cref="AlreadyExistsException"></exception>
