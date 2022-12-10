@@ -174,6 +174,12 @@ namespace FantasyApi.Services
                 throw new NotFoundException("Team with the requested id");
             }
 
+            bool hasInvalidEvent = await HasInvalidEvent(input.EventIds);
+            if (hasInvalidEvent)
+            {
+                throw new NotFoundException("Some event id");
+            }
+
             List<MySqlParameter> parameters = new()
             {
                 new MySqlParameter("idteam", input.Id),

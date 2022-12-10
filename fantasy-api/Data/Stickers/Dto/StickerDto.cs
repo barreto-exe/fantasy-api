@@ -33,6 +33,6 @@ namespace FantasyApi.Data.Stickers.Dto
         [DataNames("creation_date")]
         public DateTime CreatedAt { get; set; }
         [DataNames("udpate_date")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

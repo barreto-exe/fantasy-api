@@ -12,33 +12,35 @@ using System.Threading.Tasks;
 
 namespace FantasyApi.Functions.Stickers
 {
-    public class PostStickers
+    public class PutStickers
     {
         private readonly IStickerService _stickerService;
-        public PostStickers(IStickerService stickerService)
+        public PutStickers(IStickerService stickerService)
         {
             _stickerService = stickerService;
         }
 
-        [FunctionName("PostStickers")]
+        [FunctionName("PutStickers")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "stickers")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "stickers/{id:int}")] HttpRequest req,
+            int id,
             ILogger log)
         {
-            async Task<IActionResult> Action(StickerAddInput input)
+            async Task<IActionResult> Action(StickerUpdateInput input)
             {
                 try
                 {
-                    var result = await _stickerService.AddStickerAsync(input);
-                    return new OkObjectResult(ResponseBuilder.CreationResponse("STICKER_CREATED", result));
+                    input.Id = id;
+                    var result = await _stickerService.UpdateStickerAsync(input);
+                    return new OkObjectResult(ResponseBuilder.CreationResponse("STICKER_UPDATED", result));
                 }
                 catch (NotFoundException)
                 {
-                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("ID_NOT_FOUND"));
+                    return new BadRequestObjectResult(ResponseBuilder.ErrorResponse("STICKER_DOESNT_EXIST"));
                 }
             }
 
-            return await RequestHandler.Handle<StickerAddInput>(req, log, Action, RoleEnum.Admin, BodyTypeEnum.Formdata);
+            return await RequestHandler.Handle<StickerUpdateInput>(req, log, Action, RoleEnum.Admin, BodyTypeEnum.Formdata);
         }
     }
 }
