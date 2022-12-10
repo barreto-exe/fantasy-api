@@ -34,7 +34,7 @@ namespace FantasyApi.Services
         /// <exception cref="AlreadyExistsException"></exception>
         public async Task<SoccerPlayerDto> AddSoccerPlayerAsync(string name)
         {
-            var playerWithName = GetSoccerPlayerByNameAsync(name);
+            var playerWithName = await GetSoccerPlayerByNameAsync(name);
             if (playerWithName != null)
             {
                 throw new AlreadyExistsException("Player with the requested name");

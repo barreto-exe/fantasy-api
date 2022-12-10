@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Reflection.Metadata;
 
 namespace FantasyApi.Services
 {
@@ -63,14 +64,11 @@ namespace FantasyApi.Services
 
         public async Task<StickerDto> AddStickerAsync(StickerAddInput input)
         {
-            var sPlayer = await _playerService.GetSoccerPlayerByNameAsync(input.PlayerName);
-            if (sPlayer == null) throw new NotFoundException("Player with requested id.");
-
-            var sEvent = await _eventService.GetEventByIdAsync(input.EventId);
-            if (sEvent == null) throw new NotFoundException("Event with requested id.");
+            var sPlayer = await _playerService.GetOrAddPlayerAsync(input.PlayerName);
 
             var sTeam = await _teamService.GetTeamByIdAsync(input.TeamId);
             if (sTeam == null) throw new NotFoundException("Team with requested id.");
+            if (!sTeam.EventIds.Contains(input.EventId)) throw new NotFoundException("Team on requested event");
 
             List<MySqlParameter> parameters = new()
             {
