@@ -1,4 +1,7 @@
-﻿using FantasyApi.DataAnotations;
+﻿using FantasyApi.Data.Events.Dtos;
+using FantasyApi.Data.Teams.Dtos;
+using FantasyApi.DataAnotations;
+using Newtonsoft.Json;
 using System;
 
 namespace FantasyApi.Data.Stickers.Dto
@@ -15,10 +18,14 @@ namespace FantasyApi.Data.Stickers.Dto
         public double Height { get; set; }
         [DataNames("weight")]
         public double Weight { get; set; }
+        [JsonIgnore]
         [DataNames("id_team")]
         public int TeamId { get; set; }
+        public TeamDto Team { get; set; }
+        [JsonIgnore]
         [DataNames("id_event")]
         public int EventId { get; set; }
+        public EventDto Event { get; set; }
         [DataNames("position")]
         public string Position { get; set; }
         [DataNames("appearance_rate")]

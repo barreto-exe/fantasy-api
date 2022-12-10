@@ -12,6 +12,8 @@ namespace FantasyApi.Interfaces
     {
         Task<TeamDto> GetTeamByIdAsync(int id);
 
+        Task<IEnumerable<TeamDto>> GetTeamsAsync();
+
         Task<IEnumerable<TeamDto>> GetTeamsAsync(TeamsFilter filter);
 
         Task<PaginatedListDto<TeamDto>> GetTeamsPaginatedAsync(TeamsFilter filter);

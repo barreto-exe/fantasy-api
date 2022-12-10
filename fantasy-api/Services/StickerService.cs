@@ -5,7 +5,9 @@ using FantasyApi.Interfaces;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace FantasyApi.Services
 {
@@ -30,12 +32,33 @@ namespace FantasyApi.Services
 
         public async Task<StickerDto> GetStickerByIdAsync(int id)
         {
-            return await GetItemByIdAsync<StickerDto>("GetStickerById", "s_id", id);
+            StickerDto sticker = await GetItemByIdAsync<StickerDto>("GetStickerById", "s_id", id);
+
+            sticker.Event = 
+                (await _eventService.GetEventsAsync())
+                .FirstOrDefault(x => x.Id == sticker.EventId);
+
+            sticker.Team = 
+                (await _teamService.GetTeamsAsync())
+                .FirstOrDefault(x => x.Id == sticker.TeamId);
+
+            return sticker;
         }
 
         public async Task<IEnumerable<StickerDto>> GetStickersAsync()
         {
-            return await GetItemsAsync<StickerDto>("GetStickers");
+            var stickers = (await GetItemsAsync<StickerDto>("GetStickers")).ToList();
+
+            var events = await _eventService.GetEventsAsync();
+            var teams = await _teamService.GetTeamsAsync();
+
+            stickers.ForEach(s =>
+            {
+                s.Event = events.FirstOrDefault(x => x.Id == s.EventId);
+                s.Team = teams.FirstOrDefault(x => x.Id == s.TeamId);
+            });
+
+            return stickers;
         }
 
         public async Task<StickerDto> AddStickerAsync(StickerAddInput input)

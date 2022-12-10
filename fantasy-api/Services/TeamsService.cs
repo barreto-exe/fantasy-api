@@ -48,6 +48,11 @@ namespace FantasyApi.Services
             }
         }
 
+        public async Task<IEnumerable<TeamDto>> GetTeamsAsync()
+        {
+            return await GetItemsAsync<TeamDto>("GetTeams");
+        }
+
         public async Task<IEnumerable<TeamDto>> GetTeamsAsync(TeamsFilter filter)
         {
             var dtos = (await GetItemsAsync<TeamDto>("GetTeams")).ToList();

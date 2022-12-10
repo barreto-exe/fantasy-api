@@ -12,7 +12,7 @@ namespace FantasyApi.Interfaces
 
         Task<IEnumerable<StickerDto>> GetStickersAsync();
 
-        /// <exception cref="AlreadyExistsException"></exception>
+        /// <exception cref="NotFoundException"></exception>
         Task<StickerDto> AddStickerAsync(StickerAddInput input);
 
         /// <exception cref="NotFoundException"></exception>
