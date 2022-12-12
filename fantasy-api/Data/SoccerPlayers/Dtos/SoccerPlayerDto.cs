@@ -6,6 +6,8 @@ namespace FantasyApi.Data.SoccerPlayer.Dtos
     {
         [DataNames("id")]
         public int Id { get; set; }
+        [DataNames("id_external")]
+        public string IdExternal { get; set; }
         [DataNames("name")]
         public string Name { get; set; }
     }

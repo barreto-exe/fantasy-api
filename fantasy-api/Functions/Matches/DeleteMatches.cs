@@ -10,19 +10,19 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace FantasyApi.Functions.Events
+namespace FantasyApi.Functions.Matches
 {
-    public class DeleteEvents
+    public class DeleteMatches
     {
-        private readonly IEventService _eventService;
-        public DeleteEvents(IEventService eventService)
+        private readonly IMatchService _matchService;
+        public DeleteMatches(IMatchService matchService)
         {
-            _eventService = eventService;
+            _matchService = matchService;
         }
 
-        [FunctionName("DeleteEvents")]
+        [FunctionName("DeleteMatches")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "events/{id:int}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "games/{id:int}")] HttpRequest req,
             int id,
             ILogger log)
         {
@@ -30,12 +30,12 @@ namespace FantasyApi.Functions.Events
             {
                 try
                 {
-                    await _eventService.DeleteEventAsync(id);
-                    return new OkObjectResult(ResponseBuilder.GeneralResponse("EVENT_DELETED"));
+                    await _matchService.DeleteMatchAsync(id);
+                    return new OkObjectResult(ResponseBuilder.GeneralResponse("MATCH_DELETED"));
                 }
                 catch (NotFoundException)
                 {
-                    return new NotFoundObjectResult(ResponseBuilder.ErrorResponse("EVENT_DOESNT_EXIST"));
+                    return new NotFoundObjectResult(ResponseBuilder.ErrorResponse("MATCH_DOESNT_EXIST"));
                 }
             }
 

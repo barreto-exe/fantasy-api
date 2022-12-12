@@ -23,6 +23,7 @@ namespace FantasyApi
             builder.Services.AddTransient<IAdService, AdService>();
             builder.Services.AddTransient<ISoccerPlayerService, SoccerPlayerService>();
             builder.Services.AddTransient<IStickerService, StickerService>();
+            builder.Services.AddTransient<IMatchService, MatchService>();
         }
     }
 }
