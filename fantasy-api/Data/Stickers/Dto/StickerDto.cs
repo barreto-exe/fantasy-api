@@ -28,6 +28,8 @@ namespace FantasyApi.Data.Stickers.Dto
         public EventDto Event { get; set; }
         [DataNames("position")]
         public string Position { get; set; }
+        [DataNames("id_external")]
+        public string ExternalUuid { get; set; }
         [DataNames("appearance_rate")]
         public double AppearanceRate { get; set; }
         [DataNames("creation_date")]

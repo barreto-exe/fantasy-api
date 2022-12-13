@@ -15,6 +15,7 @@ namespace FantasyApi.Data.Stickers.Inputs
         public int? TeamId { get; set; }
         public int? EventId { get; set; }
         public string Position { get; set; }
+        public string ExternalUuid { get; set; }
         public double? AppearanceRate { get; set; }
     }
 }

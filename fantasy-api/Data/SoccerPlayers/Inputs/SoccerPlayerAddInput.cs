@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FantasyApi.Data.SoccerPlayer.Inputs
 {
-    public class SoccerPlayerUpdateInput : BaseRequest
+    public class SoccerPlayerAddInput : BaseRequest
     {
         [Required]
-        public int Id { get; set; }
         public string Name { get; set; }
+        [Required]
         public string ExternalUuid { get; set; }
     }
 }

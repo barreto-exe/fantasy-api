@@ -1,6 +1,7 @@
 ﻿using Core.Utils.Mapping;
 using FantasyApi.Data.Base.Dtos;
 using FantasyApi.Data.Base.Exceptions;
+using FantasyApi.Data.SoccerPlayer.Inputs;
 using FantasyApi.Data.Stickers.Dto;
 using FantasyApi.Data.Stickers.Filters;
 using FantasyApi.Data.Stickers.Inputs;
@@ -110,7 +111,16 @@ namespace FantasyApi.Services
 
         public async Task<StickerDto> AddStickerAsync(StickerAddInput input)
         {
-            var sPlayer = await _playerService.GetOrAddPlayerAsync(input.PlayerName);
+            var sPlayer = await _playerService.GetOrAddPlayerAsync(new SoccerPlayerAddInput
+            {
+                Name = input.PlayerName,
+                ExternalUuid = input.ExternalUuid,
+            });
+
+            if(input.ExternalUuid != sPlayer.ExternalUuid)
+            {
+                throw new Exception("External UUID doesn't coincide with the existing one.");
+            }
 
             var sTeam = await _teamService.GetTeamByIdAsync(input.TeamId);
             if (sTeam == null) throw new NotFoundException("Team with requested id.");
@@ -158,7 +168,13 @@ namespace FantasyApi.Services
                 throw new NotFoundException("Sticker with the requested id");
             }
 
-            var sPlayer = await _playerService.GetOrAddPlayerAsync(input.PlayerName ?? old.PlayerName);
+            var oldPlayer = await _playerService.GetSoccerPlayerByNameAsync(old.PlayerName);
+            var sPlayer = await _playerService.UpdateSoccerPlayerAsync(new SoccerPlayerUpdateInput
+            {
+                Id = oldPlayer.Id,
+                Name = input.PlayerName ?? old.PlayerName,
+                ExternalUuid = input.ExternalUuid ?? old.ExternalUuid,
+            });
             var sEvent = await _eventService.GetEventByIdAsync(input.EventId ?? old.EventId);
             var sTeam = await _teamService.GetTeamByIdAsync(input.TeamId ?? old.TeamId);
 

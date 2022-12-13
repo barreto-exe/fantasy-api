@@ -11,9 +11,9 @@ namespace FantasyApi.Interfaces
         Task<IEnumerable<SoccerPlayerDto>> GetPlayersAsync();
         Task<SoccerPlayerDto> GetSoccerPlayerByIdAsync(int id);
         Task<SoccerPlayerDto> GetSoccerPlayerByNameAsync(string name);
-        Task<SoccerPlayerDto> GetOrAddPlayerAsync(string name);
+        Task<SoccerPlayerDto> GetOrAddPlayerAsync(SoccerPlayerAddInput input);
         /// <exception cref="AlreadyExistsException"></exception>
-        Task<SoccerPlayerDto> AddSoccerPlayerAsync(string name);
+        Task<SoccerPlayerDto> AddSoccerPlayerAsync(SoccerPlayerAddInput input);
         /// <exception cref="NotFoundException"></exception>
         Task<SoccerPlayerDto> UpdateSoccerPlayerAsync(SoccerPlayerUpdateInput input);
     }

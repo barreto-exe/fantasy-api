@@ -20,6 +20,8 @@ namespace FantasyApi.Data.Stickers.Inputs
         [Required]
         public string Position { get; set; }
         [Required]
+        public string ExternalUuid { get; set; }
+        [Required]
         public double AppearanceRate { get; set; }
     }
 }

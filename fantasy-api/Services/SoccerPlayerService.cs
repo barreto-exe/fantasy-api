@@ -26,15 +26,15 @@ namespace FantasyApi.Services
         {
             return await GetItemByIdAsync<SoccerPlayerDto>("GetSoccerPlayerByName", "playerName", name);
         }
-        public async Task<SoccerPlayerDto> GetOrAddPlayerAsync(string name)
+        public async Task<SoccerPlayerDto> GetOrAddPlayerAsync(SoccerPlayerAddInput input)
         {
-            return await GetSoccerPlayerByNameAsync(name) ?? await AddSoccerPlayerAsync(name);
+            return await GetSoccerPlayerByNameAsync(input.Name) ?? await AddSoccerPlayerAsync(input);
         }
 
         /// <exception cref="AlreadyExistsException"></exception>
-        public async Task<SoccerPlayerDto> AddSoccerPlayerAsync(string name)
+        public async Task<SoccerPlayerDto> AddSoccerPlayerAsync(SoccerPlayerAddInput input)
         {
-            var playerWithName = await GetSoccerPlayerByNameAsync(name);
+            var playerWithName = await GetSoccerPlayerByNameAsync(input.Name);
             if (playerWithName != null)
             {
                 throw new AlreadyExistsException("Player with the requested name");
@@ -42,19 +42,20 @@ namespace FantasyApi.Services
 
             List<MySqlParameter> parameters = new()
             {
-                new MySqlParameter("playerName", name),
+                new MySqlParameter("p_name", input.Name),
+                new MySqlParameter("p_id_external", input.ExternalUuid),
             };
 
             var cmd = _databaseService.GetCommand("AddSoccerPlayer", parameters);
             await _databaseService.ExecuteStoredProcedureAsync(cmd);
 
-            return await GetSoccerPlayerByNameAsync(name);
+            return await GetSoccerPlayerByNameAsync(input.Name);
         }
 
         /// <exception cref="NotFoundException"></exception>
         public async Task<SoccerPlayerDto> UpdateSoccerPlayerAsync(SoccerPlayerUpdateInput input)
         {
-            var player = await GetSoccerPlayerByNameAsync(input.OldName);
+            var player = await GetSoccerPlayerByNameAsync(input.Name);
             if (player == null)
             {
                 throw new NotFoundException("Player with the requested name");
@@ -62,14 +63,15 @@ namespace FantasyApi.Services
 
             List<MySqlParameter> parameters = new()
             {
-                new MySqlParameter("oldName", input.OldName),
-                new MySqlParameter("newName", input.NewName),
+                new MySqlParameter("p_id", input.Id),
+                new MySqlParameter("p_name", input.Name ?? player.Name),
+                new MySqlParameter("p_id_external", input.ExternalUuid ?? player.ExternalUuid),
             };
 
             var cmd = _databaseService.GetCommand("UpdateSoccerPlayer", parameters);
             await _databaseService.ExecuteStoredProcedureAsync(cmd);
 
-            return await GetSoccerPlayerByNameAsync(input.NewName);
+            return await GetSoccerPlayerByIdAsync(input.Id);
         }
     }
 }
