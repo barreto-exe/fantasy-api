@@ -57,6 +57,7 @@ Se tiene que informar lo que se haya completado el día anterior frente a todos 
 # Requerimientos
 
 # Procesos de Negocio
+A continuación, se plantean a manera de diagramas las diferentes actividades, procesos y tareas que se realizan dentro del sistema para lograr satisfacer los requerimientos del negocio. Se presentan en mapas de procesos y diagramas de flujo de datos.
 
 ## Mapas de procesos
 ![Usuario](https://lh4.googleusercontent.com/rMH7OcGEPMDX4gyq6V_XcPd1O1ssS2VrEWthB2qOebrVnuf7yh63xjacpZL3UAdi7TH2KunkzxCjay1TS2tJoYlYdui11admDdTkY24aBuXSDqQhjYeckrtyIYSo8XdqKdk6e5c3BHF-ic1mdVuAj9mQJ25vPwtGM3ulXS8xX62lNxg2tPDX_Cas8hX_7g)
