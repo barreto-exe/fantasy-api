@@ -55,6 +55,8 @@ El Daily Sprint tiene como objetivo informar a todo el equipo sobre el estado de
 Se tiene que informar lo que se haya completado el día anterior frente a todos los compañeros. Ya que nadie desea trabajar con alguien que siempre hace lo mismo, a su vez, el tiempo y claridad de la reunión es importante para el éxito de la misma.
 
 # Requerimientos
+Los requerimientos del sistema, tanto funcionales y no funcionales, fueron definidos en lenguaje natural en forma de historias de usuario con el fin de lograr un manejo más sencillo y práctico para todos los stakeholders. Los mismos quedan planteados a continuación.
+
 ## Obtener cromos
 
 - Abrir sobre diario
