@@ -1,6 +1,6 @@
 # Contenido
 - [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
-- [Metodología](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#metodologia)
+- [Metodología](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#metodolog%C3%ADa)
 - [Requerimientos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#requerimientos)
 - [Procesos de Negocio](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#procesos-de-negocio)
 - [Diseño Lógico de la Base de Datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#dise%C3%B1o-l%C3%B3gico-de-la-base-de-datos)
