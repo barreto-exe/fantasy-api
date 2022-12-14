@@ -1,5 +1,9 @@
 # Contenido
 - [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
+- [Metodología](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#metodologia)
+- [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
+- [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
+- [Referencias](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#referencias)
 
 # Planteamiento del problema
 Las redes sociales son actualmente una de las aplicaciones más avanzadas y utilizadas, ocupando su lugar a un ritmo vertiginoso y convirtiéndose en una prometedora área de negocio para las empresas y sobre todo como lugar de encuentro. Corrección de errores humanos, así como la capacidad de "interactuar" aunque no los conozcamos, el sistema es abierto y está construido con lo que cada persona involucrada en la red tiene para ofrecer, cada nuevo miembro que se une convierte al grupo en un uno nuevo. Una red deja de ser lo que es si uno de sus miembros ya no forma parte de ella.
