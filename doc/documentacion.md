@@ -1,8 +1,15 @@
 # Contenido
 - [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
 - [Metodología](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#metodologia)
-- [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
-- [Planteamiento del problema](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#planteamiento-del-problema)
+- [Requerimientos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#requerimientos)
+- [Procesos de Negocio](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#procesos-de-negocio)
+- [Diseño Lógico de la Base de Datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#diseño-logico-de-la-base-de-datos)
+- [Diseño Físico de la Base de Datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#diseño-fisico-de-la-base-de-datos)
+- [Diccionario de Datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#diccionario-de-datos)
+- [Esquema de Seguridad](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#esquema-de-seguridad)
+- [Estándares Utilizados](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#estandares-utilizados)
+- [Consideraciones realizadas en función de los datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#consideraciones-realizadas-en-función-de-los-datos)
+- [Esquema de pruebas](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#esquema-de-pruebas)
 - [Referencias](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#referencias)
 
 # Planteamiento del problema
@@ -46,6 +53,24 @@ El Daily Sprint tiene como objetivo informar a todo el equipo sobre el estado de
 2. ¿En qué trabajaré hoy?
 3. ¿Estoy siendo bloqueado por algo?
 Se tiene que informar lo que se haya completado el día anterior frente a todos los compañeros. Ya que nadie desea trabajar con alguien que siempre hace lo mismo, a su vez, el tiempo y claridad de la reunión es importante para el éxito de la misma.
+
+# Requerimientos
+
+# Procesos de Negocio
+
+# Diseño Lógico de la Base de Datos
+
+# Diseño Físico de la Base de Datos
+
+# Diccionario de Datos
+
+# Esquema de Seguridad
+
+# Estándares Utilizados
+
+# Consideaciones realizadas en función de los datos
+
+# Esquema de pruebas
 
 # Referencias
 - [Confirmación de Requerimientos (Offside)](). Presentado por los Estudiantes de la sección 401 de Ingeniería del Software - Semestre 2023-15.
