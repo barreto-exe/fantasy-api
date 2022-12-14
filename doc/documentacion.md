@@ -55,6 +55,135 @@ El Daily Sprint tiene como objetivo informar a todo el equipo sobre el estado de
 Se tiene que informar lo que se haya completado el día anterior frente a todos los compañeros. Ya que nadie desea trabajar con alguien que siempre hace lo mismo, a su vez, el tiempo y claridad de la reunión es importante para el éxito de la misma.
 
 # Requerimientos
+## Obtener cromos
+
+- Abrir sobre diario
+    - Yo como usuario quiero abrir un sobre diario para completar el álbum.
+- Obtener recompensas (cromos)
+
+## Álbum I
+
+- Ver álbum
+    - Yo como usuario quiero ver mi álbum para observar las páginas que he completado.
+    - Yo como usuario quiero ver el álbum por páginas de cada equipo para saber los cromos que pertenecen a él.
+- Ver carrusel de cromos disponibles a pegar
+- Pegar cromo al álbum
+
+## Auth I
+
+- Login
+    - Yo como usuario quiero loguearme en la plataforma para hacer uso de ella.
+- Registro
+    - Yo como usuario quiero registrarme en la plataforma para disfrutar de sus servicios.
+
+## Auth II
+
+- Recuperar contraseña
+    - Yo como usuario quiero que el sistema me envíe un correo con un código secreto para recuperar mi contraseña.
+    - Yo como usuario quiero que validen el código secreto que me envió el sistema para recuperar mi contraseña.
+- El jugador puede escoger equipo favorito
+
+## Ver anuncios
+
+- Ver anuncio de popup en el sobre diario
+
+## Gestionar usuarios
+
+- Crear usuarios
+    - Yo como administrador quiero crear a los usuarios.
+    - Yo como administrador quiero asignar roles importantes dentro de la plataforma para controlar a qué tienen acceso los usuarios.
+- Listar a los usuarios
+    - Yo como administrador quiero listar los usuarios.
+- Editar información de los usuarios
+    - Yo como administrador quiero editar la información del usuario.
+- Eliminar usuario
+    - Yo como administrador quiero eliminar usuarios.
+
+## Gestionar cromos
+
+- Crear cromo
+    - Yo como administrador quiero crear cromos para añadir nuevos cromos al álbum.
+    - Yo como administrador quiero crear un cromo para los usuarios.
+- Listar cromo
+    - Yo como administrador quiero listar cromos para observar los cromos que componen al álbum.
+- Editar cromo
+    - Yo como administrador quiero editar cromos para modificar los cromos que componen al álbum.
+- Eliminar cromo
+    - Yo como administrador quiero eliminar cromos para quitar cromos que componen al álbum.
+- Ajustar probabilidad de salida del cromo
+    - Yo como administrador quiero ajustar la probabilidad de que salga un determinado cromo para tener cromos de distintas rarezas.
+- Cambiar el equipo de un cromo
+    - Yo como administrador quiero establecer el equipo de un cromo.
+
+## Gestionar equipos
+
+- Crear equipos
+    - Yo como administrador quiero crear un equipo para agrupar a los jugadores.
+- Listar equipos
+    - Yo como administrador quiero listar a los equipos para ver a equipos y jugadores que conforman el equipo.
+- Editar equipos
+    - Yo como administrador quiero editar los equipos para cambiar la información del equipo.
+- Eliminar equipos
+    - Yo como administrador quiero eliminar equipos para mantener la información del álbum al día con respecto a los jugadores.
+
+## Gestionar anuncios I
+
+- Crear anuncios
+    - Yo como administrador quiero crear anuncios para publicitar a mis anunciantes en la plataforma.
+- Listar anuncios
+    - Yo como administrador quiero listar anuncios para saber los anuncios que tengo activos en la plataforma.
+- Editar anuncios
+    - Yo como administrador quiero editar anuncios para modificar los anuncios de mis anunciantes en la plataforma.
+- Eliminar anuncios
+    - Yo como administrador quiero eliminar anuncios para quitarlos de la plataforma.
+- Exportar reporte de estadísticas de los anuncios
+
+## Mercado
+
+- Ver subastas
+- Ver subastas que yo inicié
+- Ver subastas en las que participó
+- Crear subasta
+    - Yo como usuario quiero realizar una subasta para ganar monedas.
+    - Yo como usuario quiero obtener el dinero de mi subasta.
+- Participar en subasta
+    - Yo como usuario quiero participar en una subasta para obtener otro jugador para mi plantilla.
+    - Yo como usuario quiero recibir el jugador de subasta en caso de haberla ganado.
+
+## Banca de jugadores
+
+- Obtener jugadores
+- Ver banca
+    - Yo como usuario quiero tener a los jugadores que no están en mi equipo en la banca para saber qué opciones de cambio tengo.
+
+## Plantilla de jugadores
+
+- Gestionar jugadores del equipo
+    - Yo como usuario quiero agregar jugadores al equipo para armar mi equipo ideal.
+    - Yo como usuario quiero quitar jugadores del equipo para adaptar el equipo a mi equipo ideal.
+- Mostrar últimos puntajes de cada jugador
+    - Yo como usuario quiero ver los últimos puntajes obtenidos por los jugadores de mi plantilla en sus respectivos partidos más recientes para poder ver cuántos puntos ganaron/perdieron.
+
+## Distribuir recompensas
+
+- Tarea programada para distribuir recompensas
+- Distribuir puntaje a cada usuario dependiendo del rendimiento en el partido jugado
+
+## Ranking global
+
+- Dar rango a los usuarios por su desempeño en el fantasy
+
+## Dinero del fantasy
+
+- Recibir dinero inicial al inscribirse en una liga
+- Ver tu dinero
+
+## Gestionar partidos
+
+- Cargar información en “Gestión de resultados”
+- Modificar información en “Gestión de resultados”
+- Listar información en “Gestión de resultados”
+- Eliminar información en “Gestión de resultados”
 
 # Procesos de Negocio
 A continuación, se plantean a manera de diagramas las diferentes actividades, procesos y tareas que se realizan dentro del sistema para lograr satisfacer los requerimientos del negocio. Se presentan en mapas de procesos y diagramas de flujo de datos.
