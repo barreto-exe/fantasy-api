@@ -73,4 +73,4 @@ Se tiene que informar lo que se haya completado el día anterior frente a todos 
 # Esquema de pruebas
 
 # Referencias
-- [Confirmación de Requerimientos (Offside)](). Presentado por los Estudiantes de la sección 401 de Ingeniería del Software - Semestre 2023-15.
+- [Confirmación de Requerimientos (Offside)](https://drive.google.com/file/d/13Kc3CiV1jfGLhp6-XI89TrVH_v-uWUe7/view). Presentado por los Estudiantes de la sección 401 de Ingeniería del Software - Semestre 2023-15.
