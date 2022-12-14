@@ -8,7 +8,7 @@
 - [Diccionario de Datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#diccionario-de-datos)
 - [Esquema de Seguridad](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#esquema-de-seguridad)
 - [Estándares Utilizados](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#est%C3%A1ndares-utilizados)
-- [Consideraciones realizadas en función de los datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#consideaciones-realizadas-en-funci%C3%B3n-de-los-datos)
+- [Consideraciones realizadas en función de los datos](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#consideraciones-realizadas-en-funci%C3%B3n-de-los-datos)
 - [Esquema de pruebas](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#esquema-de-pruebas)
 - [Referencias](https://github.com/BD2-UCAB-GUAYANA/fantasy-api/blob/master/doc/documentacion.md#referencias)
 
@@ -241,7 +241,7 @@ A continuación, se plantean a manera de diagramas las diferentes actividades, p
 
 # Estándares Utilizados
 
-# Consideaciones realizadas en función de los datos
+# Consideraciones realizadas en función de los datos
 
 # Esquema de pruebas
 
